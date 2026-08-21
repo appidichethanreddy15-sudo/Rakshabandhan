@@ -163,6 +163,10 @@
   perspective: 1200px;
 }
 
+.perspective-1400 {
+  perspective: 1400px;
+}
+
 .transform-style-3d {
   transform-style: preserve-3d;
 }
@@ -394,7 +398,7 @@
 }
 
 /* ==========================================================================
-   3D Orbiting Memory Polaroids for "Tie Rakhi Again" Experience
+   3D Orbiting Memory Polaroids for Grand Experiences
    ========================================================================== */
 
 @keyframes memoryOrbit1 {
@@ -445,6 +449,56 @@
 .animate-memory-orbit-4 { animation: memoryOrbit4 21s linear infinite; }
 .animate-memory-orbit-5 { animation: memoryOrbit5 19s linear infinite; }
 .animate-memory-orbit-6 { animation: memoryOrbit6 23s linear infinite; }
+
+/* 3D Grand Finale Orbit Keyframes (Letter Climax) */
+@keyframes finaleOrbit1 {
+  0% { transform: rotate(0deg) translateX(155px) rotate(0deg) scale(0.9); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: rotate(360deg) translateX(155px) rotate(-360deg) scale(0.9); opacity: 0.9; }
+}
+
+@keyframes finaleOrbit2 {
+  0% { transform: rotate(60deg) translateX(180px) rotate(-60deg) scale(0.85); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: rotate(420deg) translateX(180px) rotate(-420deg) scale(0.85); opacity: 0.9; }
+}
+
+@keyframes finaleOrbit3 {
+  0% { transform: rotate(120deg) translateX(160px) rotate(-120deg) scale(0.9); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: rotate(480deg) translateX(160px) rotate(-480deg) scale(0.9); opacity: 0.9; }
+}
+
+@keyframes finaleOrbit4 {
+  0% { transform: rotate(180deg) translateX(185px) rotate(-180deg) scale(0.85); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: rotate(540deg) translateX(185px) rotate(-540deg) scale(0.85); opacity: 0.9; }
+}
+
+@keyframes finaleOrbit5 {
+  0% { transform: rotate(240deg) translateX(155px) rotate(-240deg) scale(0.9); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: rotate(600deg) translateX(155px) rotate(-600deg) scale(0.9); opacity: 0.9; }
+}
+
+@keyframes finaleOrbit6 {
+  0% { transform: rotate(300deg) translateX(175px) rotate(-300deg) scale(0.85); opacity: 0; }
+  10% { opacity: 0.95; }
+  90% { opacity: 0.95; }
+  100% { transform: rotate(660deg) translateX(175px) rotate(-660deg) scale(0.85); opacity: 0.9; }
+}
+
+.animate-finale-orbit-1 { animation: finaleOrbit1 18s linear infinite; }
+.animate-finale-orbit-2 { animation: finaleOrbit2 20s linear infinite; }
+.animate-finale-orbit-3 { animation: finaleOrbit3 17s linear infinite; }
+.animate-finale-orbit-4 { animation: finaleOrbit4 21s linear infinite; }
+.animate-finale-orbit-5 { animation: finaleOrbit5 19s linear infinite; }
+.animate-finale-orbit-6 { animation: finaleOrbit6 22s linear infinite; }
 
 /* ==========================================================================
    Cinematic 3D Memory-to-Memory Page Transitions
