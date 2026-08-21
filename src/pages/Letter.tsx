@@ -2,64 +2,64 @@ import React, { useState } from 'react';
 import { PageTransition } from '../components/PageTransition';
 import { letterData } from '../data/letterData';
 import { WashiTape } from '../components/WashiTape';
-import { Sparkles, Heart, Gift, X } from 'lucide-react';
+import { Sparkles, Heart, Gift, X, Award, Shield } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { ImageWithFallback } from '../components/ImageWithFallback';
 
-// 6 Milestone Orbiting Memories for Grand Finale
-const finaleOrbitMemories = [
-  { id: 1, title: "Our First Chapter", img: "/images/journey.jpg", anim: "animate-finale-orbit-1" },
-  { id: 2, title: "Birthday Joy", img: "/images/birthday1.jpg", anim: "animate-finale-orbit-2" },
-  { id: 3, title: "The Memorable Night", img: "/images/night-memory.jpg", anim: "animate-finale-orbit-3" },
-  { id: 4, title: "Bike Ride Adventures", img: "/images/bike_ride.jpg", anim: "animate-finale-orbit-4" },
-  { id: 5, title: "Hand Art & Silly Jokes", img: "/images/hand_art.jpg", anim: "animate-finale-orbit-5" },
-  { id: 6, title: "Pure Sisterly Care", img: "/images/maa_wrist.png", anim: "animate-finale-orbit-6" },
+// 6 Milestone Keepsake Memories for the 3D Gallery Cascade
+const keepsakeGalleryMemories = [
+  { id: 1, title: "Our First Chapter", img: "/images/journey.jpg", classAnim: "animate-cascade-1" },
+  { id: 2, title: "Birthday Joy", img: "/images/birthday1.jpg", classAnim: "animate-cascade-2" },
+  { id: 3, title: "The Memorable Night", img: "/images/night-memory.jpg", classAnim: "animate-cascade-3" },
+  { id: 4, title: "Bike Ride Adventures", img: "/images/bike_ride.jpg", classAnim: "animate-cascade-4" },
+  { id: 5, title: "Hand Art & Silly Jokes", img: "/images/hand_art.jpg", classAnim: "animate-cascade-5" },
+  { id: 6, title: "Pure Sisterly Care", img: "/images/maa_wrist.png", classAnim: "animate-cascade-6" },
 ];
 
 export const Letter: React.FC = () => {
   const [surpriseOpen, setSurpriseOpen] = useState(false);
-  const [finaleStage, setFinaleStage] = useState<'emerge' | 'orbit' | 'converge' | 'reveal'>('emerge');
+  const [experienceStage, setExperienceStage] = useState<'locked' | 'unfolding' | 'cascade' | 'climax'>('locked');
 
   const handleOpenSurprise = () => {
     setSurpriseOpen(true);
-    setFinaleStage('emerge');
+    setExperienceStage('locked');
 
-    // Stage 1 -> Stage 2: 3D Memories Orbit around 3D Rakhi (0.7s)
+    // Stage 1 -> 2: Golden Wax Seal Breaks & 3D Chest Unfolds (0.8s)
     setTimeout(() => {
-      setFinaleStage('orbit');
+      setExperienceStage('unfolding');
       try {
         confetti({
-          particleCount: 50,
+          particleCount: 45,
           spread: 70,
           origin: { y: 0.5 },
-          colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FAF6F0']
+          colors: ['#D4AF37', '#FAF3E0', '#F7E6E8']
         });
       } catch {
         // ignore
       }
-    }, 700);
+    }, 800);
 
-    // Stage 2 -> Stage 3: Orbiting Memories Converge Inward into the Rakhi (3.4s)
+    // Stage 2 -> 3: 3D Holographic Memories Fan Upwards into Gallery (2.2s)
     setTimeout(() => {
-      setFinaleStage('converge');
+      setExperienceStage('cascade');
       try {
         confetti({
-          particleCount: 75,
-          spread: 90,
+          particleCount: 65,
+          spread: 85,
           origin: { y: 0.55 },
-          colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FBF4DE', '#F472B6']
+          colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FBF4DE']
         });
       } catch {
         // ignore
       }
-    }, 3400);
+    }, 2200);
 
-    // Stage 3 -> Stage 4: Grand Emotional Climax Reveal (4.6s)
+    // Stage 3 -> 4: The Grand Heartfelt Parchment Rises to the Front (4.2s)
     setTimeout(() => {
-      setFinaleStage('reveal');
+      setExperienceStage('climax');
       try {
         confetti({
-          particleCount: 100,
+          particleCount: 110,
           spread: 100,
           origin: { y: 0.6 },
           colors: ['#D4AF37', '#C87D88', '#6C2231', '#FFD700', '#F7E6E8', '#9B5DE5']
@@ -67,7 +67,7 @@ export const Letter: React.FC = () => {
       } catch {
         // ignore
       }
-    }, 4600);
+    }, 4200);
   };
 
   const handleCloseSurprise = () => {
@@ -151,24 +151,24 @@ export const Letter: React.FC = () => {
         </div>
 
         {/* ==========================================================================
-            🌟 THE GRAND 3D CINEMATIC FINALE EXPERIENCE (“One Last Thing... 👀”)
-            ✨ 3D cinematic reveal | 🎀 3D Rakhi | 🖼️ Floating 3D Depth | ❤️ Memories Orbit | 💜 3D Transformation
+            🌟 UNIQUE 3D ROYAL GIFT CHEST & HOLOGRAPHIC CASCADE EXPERIENCE
+            ✨ 3D Gift Box Unfold | 🖼️ Holographic Memory Fan | 💜 Climax Parchment Rise
             ========================================================================== */}
         {surpriseOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none animate-fade-in [animation-duration:400ms]">
             
-            {/* Depth of Field Backdrop: Deep Cosmic Scrapbook Theater */}
+            {/* Depth of Field Backdrop: Deep Royal Plum & Gold Theater */}
             <div
               onClick={handleCloseSurprise}
-              className="absolute inset-0 bg-[#120612]/92 backdrop-blur-xl transition-opacity duration-700"
+              className="absolute inset-0 bg-[#0F040E]/92 backdrop-blur-xl transition-opacity duration-700"
             />
 
-            {/* Radiant Ambient Aura */}
+            {/* Radiant Ambient Light Beam */}
             <div
               className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-all duration-1000 ${
-                finaleStage === 'orbit' || finaleStage === 'converge'
-                  ? 'w-[520px] h-[520px] sm:w-[700px] sm:h-[700px] bg-radial from-[#D4AF37]/50 via-[#9B5DE5]/35 to-transparent blur-3xl opacity-100 scale-125'
-                  : 'w-80 h-80 bg-radial from-[#D4AF37]/35 via-[#9B5DE5]/20 to-transparent blur-2xl opacity-80 scale-100'
+                experienceStage === 'cascade' || experienceStage === 'climax'
+                  ? 'w-[520px] h-[520px] sm:w-[680px] sm:h-[680px] bg-radial from-[#D4AF37]/45 via-[#842D3D]/30 to-transparent blur-3xl opacity-100 scale-125'
+                  : 'w-72 h-72 bg-radial from-[#D4AF37]/25 via-[#C87D88]/20 to-transparent blur-2xl opacity-75 scale-100'
               }`}
             />
 
@@ -176,7 +176,7 @@ export const Letter: React.FC = () => {
             <button
               onClick={handleCloseSurprise}
               className="absolute top-5 right-5 z-30 text-[#FAF6F0]/70 hover:text-[#FAF6F0] transition-colors p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md cursor-pointer"
-              aria-label="Close ceremony"
+              aria-label="Close surprise"
             >
               <X className="w-5 h-5" />
             </button>
@@ -184,145 +184,130 @@ export const Letter: React.FC = () => {
             {/* 3D Perspective Stage */}
             <div className="relative z-20 max-w-xl w-full flex flex-col items-center justify-center perspective-1400 text-center">
 
-              {/* 1. Orbiting 3D Memories Constellation (Active during 'orbit') */}
-              {finaleStage === 'orbit' && (
-                <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-10">
-                  {finaleOrbitMemories.map((m) => (
+              {/* 1. Floating 3D Royal Keepsake Chest / Wax Sealed Gift Box */}
+              {(experienceStage === 'locked' || experienceStage === 'unfolding') && (
+                <div className="animate-gift-box-emerge transform-style-3d flex flex-col items-center py-6">
+                  <div className="relative w-64 sm:w-72 p-6 rounded-3xl bg-gradient-to-br from-[#4A1520] via-[#2D0B14] to-[#1F070E] border-2 border-[#D4AF37] shadow-[0_20px_50px_rgba(212,175,55,0.4)] flex flex-col items-center justify-center space-y-4">
+                    
+                    {/* Golden Corner Bracket Accents */}
+                    <div className="absolute top-2.5 left-2.5 w-5 h-5 border-t-2 border-l-2 border-[#D4AF37] rounded-tl-md" />
+                    <div className="absolute top-2.5 right-2.5 w-5 h-5 border-t-2 border-r-2 border-[#D4AF37] rounded-tr-md" />
+                    <div className="absolute bottom-2.5 left-2.5 w-5 h-5 border-b-2 border-l-2 border-[#D4AF37] rounded-bl-md" />
+                    <div className="absolute bottom-2.5 right-2.5 w-5 h-5 border-b-2 border-r-2 border-[#D4AF37] rounded-br-md" />
+
+                    {/* Glowing Golden Wax Seal */}
+                    <div
+                      className={`w-20 h-20 rounded-full bg-gradient-to-tr from-[#D4AF37] via-[#FFF5D0] to-[#B38F24] p-1.5 shadow-[0_0_30px_rgba(212,175,55,0.8)] flex items-center justify-center ${
+                        experienceStage === 'unfolding' ? 'animate-wax-seal-burst' : 'animate-pulse-glow'
+                      }`}
+                    >
+                      <div className="w-full h-full rounded-full bg-[#6C2231] border border-[#D4AF37] flex flex-col items-center justify-center text-[#FBF4DE]">
+                        <Award className="w-7 h-7 text-[#D4AF37]" />
+                        <span className="text-[7px] font-bold uppercase tracking-widest text-[#FBF4DE] mt-0.5">
+                          AKKAAA
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1 text-center">
+                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#D4AF37] flex items-center justify-center gap-1">
+                        <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                        <span>Sacred Brother's Gift</span>
+                        <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                      </span>
+                      <h3 className="font-serif-heading text-xl sm:text-2xl font-bold text-white">
+                        {experienceStage === 'locked' ? "Unlocking Your Keepsake..." : "Opening Sealed Memories... ✨"}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* 2. 3D Floating Holographic Memory Cascade Gallery (Active during 'cascade') */}
+              {experienceStage === 'cascade' && (
+                <div className="relative w-full h-72 sm:h-80 flex items-center justify-center transform-style-3d">
+                  {keepsakeGalleryMemories.map((m) => (
                     <div
                       key={m.id}
-                      className={`absolute flex flex-col items-center justify-center ${m.anim}`}
+                      className={`absolute flex flex-col items-center justify-center ${m.classAnim}`}
                     >
-                      <div className="polaroid-frame bg-white p-1 rounded-xs shadow-2xl scale-75 hover:scale-95 transition-transform duration-300 border border-[#D4AF37]/60">
+                      <div className="polaroid-frame bg-white p-1.5 rounded-xs shadow-[0_15px_30px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform duration-300 border border-[#D4AF37]/70">
                         <ImageWithFallback
                           src={m.img}
                           alt={m.title}
                           aspectRatio="square"
                           objectFit="cover"
-                          className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xs"
+                          className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xs"
                         />
-                        <span className="text-[9px] font-handwritten text-[#6C2231] font-bold block text-center truncate max-w-[80px]">
+                        <span className="text-[10px] font-handwritten text-[#6C2231] font-bold block text-center truncate max-w-[90px] mt-0.5">
                           {m.title}
                         </span>
                       </div>
                     </div>
                   ))}
+
+                  <div className="absolute bottom-2 inset-x-0 text-center animate-fade-in">
+                    <span className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold bg-black/60 px-4 py-1.5 rounded-full border border-[#D4AF37]/40 backdrop-blur-md">
+                      ✦ Unfurling 3 Unforgettable Years ✦
+                    </span>
+                  </div>
                 </div>
               )}
 
-              {/* 2. Floating 3D Signature Rakhi Centerpiece */}
-              <div
-                className={`transform-style-3d transition-all duration-700 ease-out py-6 ${
-                  finaleStage === 'orbit'
-                    ? 'scale-120 translate-z-10 rotate-y-6 drop-shadow-[0_0_45px_rgba(212,175,55,0.9)]'
-                    : finaleStage === 'converge'
-                    ? 'scale-135 translate-z-16 rotate-y-12 drop-shadow-[0_0_65px_rgba(212,175,55,1)] animate-pulse'
-                    : finaleStage === 'reveal'
-                    ? 'scale-110 translate-z-4 rotate-y-0 drop-shadow-[0_0_35px_rgba(212,175,55,0.7)]'
-                    : 'scale-100 rotate-y-0'
-                }`}
-              >
-                <div className="relative flex items-center justify-center">
-                  {/* 3D Silk Threads Left */}
-                  <div className="w-16 sm:w-28 h-1.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]" />
+              {/* 3. The Grand Heartfelt Climax Parchment (Active during 'climax') */}
+              {experienceStage === 'climax' && (
+                <div className="animate-parchment-rise transform-style-3d w-full space-y-4">
+                  <div className="relative p-6 sm:p-9 rounded-3xl bg-gradient-to-b from-[#250C15] via-[#1A070E] to-[#120409] border-2 border-[#D4AF37] shadow-[0_0_50px_rgba(212,175,55,0.6)] text-left space-y-4">
+                    
+                    {/* Top Header */}
+                    <div className="flex items-center justify-between border-b border-[#D4AF37]/30 pb-2.5">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#FBF4DE] text-[11px] font-bold uppercase tracking-widest">
+                        <Shield className="w-3 h-3 text-[#D4AF37]" />
+                        <span>To My Dearest Akkaaa 🌸</span>
+                      </div>
+                      <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+                    </div>
 
-                  {/* 3D Sacred Central Rosette */}
-                  <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-2.5 bg-gradient-to-tr from-[#D4AF37] via-[#FFFDF9] to-[#9B5DE5] ring-4 ring-[#D4AF37]/80 shadow-[0_0_50px_rgba(212,175,55,0.8)] flex items-center justify-center animate-pulse-glow">
-                    <div className="w-full h-full rounded-full bg-[#6C2231] border-2 border-[#D4AF37] flex flex-col items-center justify-center text-[#FAF6F0] shadow-inner">
-                      <Heart className="w-9 h-9 sm:w-10 sm:h-10 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
-                      <span className="text-[10px] font-bold tracking-widest uppercase text-[#FBF4DE] mt-1">
-                        FOREVER
+                    {/* Big Heartfelt Reveal */}
+                    <div className="py-2 border-y border-[#D4AF37]/20 bg-gradient-to-r from-transparent via-[#D4AF37]/15 to-transparent text-center">
+                      <h3 className="font-serif-heading text-3xl sm:text-5xl font-bold text-[#FFFDF9] tracking-tight filter drop-shadow-md">
+                        I Love youu Bangaramm <span className="text-[#D4AF37]">❤️</span>
+                      </h3>
+                    </div>
+
+                    {/* Narrative Message */}
+                    <div className="space-y-3 text-sm sm:text-base text-gray-200 font-sans leading-relaxed">
+                      <p className="font-serif-heading italic text-base sm:text-lg text-[#FBF4DE]">
+                        “I didn't buy you a gift this year, so I built you a whole website instead.”
+                      </p>
+                      <p>
+                        No matter how many silly names I call you or where life takes us, in my heart, you will always be my dearest <strong className="font-serif-heading text-lg text-[#D4AF37]">Akkaaa</strong>—my safe place, my guide, and my true family.
+                      </p>
+                    </div>
+
+                    {/* Footer Signature */}
+                    <div className="pt-3 border-t border-[#D4AF37]/25 flex items-center justify-between">
+                      <p className="font-handwritten text-2xl sm:text-3xl text-[#E9D5FF] font-bold">
+                        Always & Forever, Akkaaa ✨
+                      </p>
+                      <span className="font-serif-heading italic text-[#D4AF37] text-sm sm:text-base font-semibold">
+                        — Always your brother Chethan ❤️
                       </span>
                     </div>
 
-                    {/* Golden Embellishment Beads */}
-                    <div className="absolute -top-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
-                    <div className="absolute -bottom-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
-                    <div className="absolute -left-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
-                    <div className="absolute -right-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
                   </div>
 
-                  {/* 3D Silk Threads Right */}
-                  <div className="w-16 sm:w-28 h-1.5 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]" />
+                  {/* Cherish Button */}
+                  <div className="pt-2 flex items-center justify-center">
+                    <button
+                      onClick={handleCloseSurprise}
+                      className="px-8 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E2C055] text-[#241126] font-sans font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                    >
+                      Cherish This Forever ❤️
+                    </button>
+                  </div>
                 </div>
-              </div>
-
-              {/* 3. Dynamic Narrative & Emotional 3D Reveal */}
-              <div className="mt-4 max-w-lg mx-auto space-y-4 px-4">
-                {finaleStage === 'emerge' && (
-                  <div className="animate-fade-in space-y-2">
-                    <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
-                      ✦ Unveiling Our Lifelong Story ✦
-                    </p>
-                    <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white">
-                      Gathering Every Precious Memory...
-                    </h3>
-                  </div>
-                )}
-
-                {finaleStage === 'orbit' && (
-                  <div className="animate-fade-in space-y-2">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9B5DE5]/30 border border-[#9B5DE5]/50 text-[#E9D5FF] text-xs font-semibold uppercase tracking-widest">
-                      <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-                      <span>Every Laugh & Every Memory We Shared</span>
-                    </div>
-                    <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white">
-                      “Three unforgettable years... sealed into one eternal bond.”
-                    </h3>
-                  </div>
-                )}
-
-                {finaleStage === 'converge' && (
-                  <div className="animate-fade-in space-y-2">
-                    <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
-                      ✦ One Final Message From My Heart ✦
-                    </p>
-                    <h3 className="font-serif-heading text-2xl sm:text-4xl font-bold text-[#FFFDF9]">
-                      For My Dearest Akkaaa ❤️
-                    </h3>
-                  </div>
-                )}
-
-                {finaleStage === 'reveal' && (
-                  <div className="animate-fade-in [animation-duration:700ms] space-y-4">
-                    <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#2A1528] via-[#1E0D1C] to-[#160814] border border-[#D4AF37]/60 shadow-2xl text-left space-y-3">
-                      
-                      <div className="flex items-center justify-between border-b border-[#D4AF37]/25 pb-2">
-                        <span className="text-[11px] uppercase tracking-widest text-[#D4AF37] font-bold">
-                          ✦ To My Dearest Akkaaa 🌸 ✦
-                        </span>
-                        <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-                      </div>
-
-                      <h3 className="font-serif-heading text-3xl sm:text-4xl font-bold text-[#FFFDF9] tracking-tight filter drop-shadow-xs">
-                        I Love youu Bangaramm <span className="text-[#D4AF37]">❤️</span>
-                      </h3>
-
-                      <p className="text-sm sm:text-base text-gray-200 font-sans leading-relaxed">
-                        No matter how many silly names I call you or where life takes us, in my heart, you will always be my dearest <strong className="font-serif-heading text-lg text-[#FBF4DE]">Akkaaa</strong>—my safe place, my guide, and my true family.
-                      </p>
-
-                      <div className="pt-2 border-t border-[#D4AF37]/20 flex items-center justify-between">
-                        <p className="font-handwritten text-2xl sm:text-3xl text-[#E9D5FF] font-bold">
-                          Always & Forever, Akkaaa ✨
-                        </p>
-                        <span className="font-serif-heading italic text-[#D4AF37] text-sm sm:text-base font-semibold">
-                          — Always your brother ❤️
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Replay / Close Action */}
-                    <div className="pt-2 flex items-center justify-center gap-3">
-                      <button
-                        onClick={handleCloseSurprise}
-                        className="px-8 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E2C055] text-[#241126] font-sans font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                      >
-                        Cherish This Memory ❤️
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
+              )}
 
             </div>
 
