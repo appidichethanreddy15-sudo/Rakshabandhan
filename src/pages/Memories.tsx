@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { PageTransition } from '../components/PageTransition';
 import { sequentialMemories, type StoryMemory } from '../data/memories';
@@ -17,19 +17,26 @@ export const Memories: React.FC = () => {
   const stepParam = parseInt(searchParams.get('step') || '1', 10);
   const currentStep = isNaN(stepParam) || stepParam < 1 || stepParam > totalSteps ? 1 : stepParam;
 
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const prevStepRef = useRef(currentStep);
+  const [turnDirection, setTurnDirection] = useState<'forward' | 'backward'>('forward');
+  const [isTurnAnimActive, setIsTurnAnimActive] = useState(false);
   const [displayedMemory, setDisplayedMemory] = useState<StoryMemory>(
     sequentialMemories[currentStep - 1] || sequentialMemories[0]
   );
 
   useEffect(() => {
-    // When step changes, perform smooth section transition
-    setIsTransitioning(true);
+    const isForward = currentStep >= prevStepRef.current;
+    setTurnDirection(isForward ? 'forward' : 'backward');
+    prevStepRef.current = currentStep;
+
+    setIsTurnAnimActive(true);
+    setDisplayedMemory(sequentialMemories[currentStep - 1] || sequentialMemories[0]);
+
     const timer = setTimeout(() => {
-      setDisplayedMemory(sequentialMemories[currentStep - 1] || sequentialMemories[0]);
-      setIsTransitioning(false);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 280);
+      setIsTurnAnimActive(false);
+    }, 600);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return () => clearTimeout(timer);
   }, [currentStep]);
@@ -45,7 +52,7 @@ export const Memories: React.FC = () => {
 
   return (
     <PageTransition>
-      <div className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto flex flex-col items-center min-h-[75vh] justify-between">
+      <div className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto flex flex-col items-center min-h-[75vh] justify-between perspective-1200 overflow-hidden">
         
         {/* Subtle Scrapbook Progress Indicator */}
         <div className="w-full flex items-center justify-between mb-6 pb-3 border-b border-[#C87D88]/20">
@@ -73,17 +80,19 @@ export const Memories: React.FC = () => {
           </div>
         </div>
 
-        {/* Dynamic Storytelling Memory Content */}
+        {/* 3D Memory Book Page Container */}
         <div
           key={displayedMemory.id}
-          className={`w-full flex flex-col items-center text-center transition-all duration-300 transform ${
-            isTransitioning
-              ? 'opacity-0 translate-y-3 scale-98'
-              : 'opacity-100 translate-y-0 scale-100'
+          className={`w-full flex flex-col items-center text-center transform-style-3d relative ${
+            isTurnAnimActive
+              ? turnDirection === 'forward'
+                ? 'memory-turn-forward-in'
+                : 'memory-turn-backward-in'
+              : ''
           }`}
         >
           {displayedMemory.isNicknames ? (
-            /* Specialized Interactive Nicknames Section */
+            /* Specialized Interactive 3D Nicknames Section */
             <NicknamesSection
               image={displayedMemory.image}
               onNext={handleNext}

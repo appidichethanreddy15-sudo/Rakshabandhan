@@ -158,9 +158,9 @@
   animation: pulseGlow 2.5s infinite;
 }
 
-/* 3D Perspective Utilities for Flippable Meaning Cards */
-.perspective-1000 {
-  perspective: 1000px;
+/* 3D Perspective Utilities */
+.perspective-1200 {
+  perspective: 1200px;
 }
 
 .transform-style-3d {
@@ -172,87 +172,168 @@
   -webkit-backface-visibility: hidden;
 }
 
-.rotate-y-180 {
-  transform: rotateY(180deg);
+/* ==========================================================================
+   3D Nickname Reveal Keyframes & Transformations
+   ========================================================================== */
+
+@keyframes card3DOut {
+  0% {
+    opacity: 1;
+    transform: translateZ(0) rotateY(0deg) scale(1);
+    filter: blur(0px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: translateZ(-80px) rotateY(-45deg) translateY(-8px) scale(0.94);
+  }
+  100% {
+    opacity: 0;
+    transform: translateZ(-160px) rotateY(-90deg) translateY(-14px) scale(0.82);
+    filter: blur(2px);
+  }
+}
+
+@keyframes card3DIn {
+  0% {
+    opacity: 0;
+    transform: translateZ(-160px) rotateY(90deg) translateY(14px) scale(0.82);
+    filter: blur(2px);
+  }
+  55% {
+    opacity: 0.95;
+    transform: translateZ(20px) rotateY(-6deg) translateY(-2px) scale(1.03);
+    filter: blur(0px);
+  }
+  80% {
+    transform: translateZ(0px) rotateY(2deg) translateY(0px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0) rotateY(0deg) translateY(0) scale(1);
+  }
+}
+
+.nickname-card-out {
+  animation: card3DOut 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.nickname-card-in {
+  animation: card3DIn 750ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+/* 3D Orbiting Particle Burst */
+@keyframes particleOrbit {
+  0% {
+    transform: rotate(0deg) translateX(45px) rotate(0deg) scale(0.6);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) translateX(70px) rotate(-180deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(360deg) translateX(90px) rotate(-360deg) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.animate-particle-orbit {
+  animation: particleOrbit 1400ms ease-out forwards;
 }
 
 /* ==========================================================================
-   Cinematic 3D "Book Turn" Page Transitions
+   Cinematic 3D Memory-to-Memory Page Transitions
    ========================================================================== */
 
-.book-viewport {
-  perspective: 1600px;
-  transform-style: preserve-3d;
-  width: 100%;
-  overflow-x: hidden;
+@keyframes memoryTurnForwardOut {
+  0% {
+    opacity: 1;
+    transform: rotateY(0deg) translateX(0) translateZ(0) scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotateY(-20deg) translateX(-45px) translateZ(-80px) scale(0.95);
+    filter: brightness(0.85);
+  }
 }
 
-@keyframes bookTurnForward {
+@keyframes memoryTurnForwardIn {
   0% {
-    opacity: 0.3;
-    transform: rotateY(-18deg) translateX(40px) scale(0.97);
-    filter: brightness(0.85) drop-shadow(-15px 10px 25px rgba(45, 36, 38, 0.25));
+    opacity: 0;
+    transform: rotateY(22deg) translateX(45px) translateZ(60px) scale(0.95);
+    filter: brightness(1.05) drop-shadow(-15px 10px 25px rgba(45, 36, 38, 0.2));
   }
   60% {
-    opacity: 0.9;
-    filter: brightness(1.03);
+    opacity: 0.95;
+    filter: brightness(1.02);
   }
   100% {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0px) scale(1);
+    transform: rotateY(0deg) translateX(0) translateZ(0) scale(1);
     filter: brightness(1) drop-shadow(0 0 0 transparent);
   }
 }
 
-@keyframes bookTurnBackward {
+@keyframes memoryTurnBackwardOut {
   0% {
-    opacity: 0.3;
-    transform: rotateY(18deg) translateX(-40px) scale(0.97);
-    filter: brightness(0.85) drop-shadow(15px 10px 25px rgba(45, 36, 38, 0.25));
+    opacity: 1;
+    transform: rotateY(0deg) translateX(0) translateZ(0) scale(1);
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotateY(20deg) translateX(45px) translateZ(-80px) scale(0.95);
+    filter: brightness(0.85);
+  }
+}
+
+@keyframes memoryTurnBackwardIn {
+  0% {
+    opacity: 0;
+    transform: rotateY(-22deg) translateX(-45px) translateZ(60px) scale(0.95);
+    filter: brightness(1.05) drop-shadow(15px 10px 25px rgba(45, 36, 38, 0.2));
   }
   60% {
-    opacity: 0.9;
-    filter: brightness(1.03);
+    opacity: 0.95;
+    filter: brightness(1.02);
   }
   100% {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0px) scale(1);
+    transform: rotateY(0deg) translateX(0) translateZ(0) scale(1);
     filter: brightness(1) drop-shadow(0 0 0 transparent);
   }
 }
 
-@keyframes pageSheenSweep {
-  0% {
-    opacity: 0;
-    transform: translateX(-100%) skewX(-20deg);
-  }
-  30% {
-    opacity: 0.45;
-  }
-  60% {
-    opacity: 0.2;
-    transform: translateX(60%) skewX(-15deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(150%) skewX(-10deg);
-  }
-}
-
-.book-turn-forward {
-  animation: bookTurnForward 580ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.memory-turn-forward-out {
+  animation: memoryTurnForwardOut 380ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   transform-origin: left center;
-  backface-visibility: hidden;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
-.book-turn-backward {
-  animation: bookTurnBackward 580ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.memory-turn-forward-in {
+  animation: memoryTurnForwardIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: left center;
+  will-change: transform, opacity;
+}
+
+.memory-turn-backward-out {
+  animation: memoryTurnBackwardOut 380ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   transform-origin: right center;
-  backface-visibility: hidden;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
+.memory-turn-backward-in {
+  animation: memoryTurnBackwardIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: right center;
+  will-change: transform, opacity;
+}
+
+/* Book Page Turn Sheen */
 .book-page-sheen {
   position: absolute;
   top: 0;
@@ -272,9 +353,22 @@
   animation: pageSheenSweep 580ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Subtle Book Gutter Binding (Spine shadow on left) */
-.book-spine-crease {
-  position: relative;
+@keyframes pageSheenSweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) skewX(-20deg);
+  }
+  30% {
+    opacity: 0.45;
+  }
+  60% {
+    opacity: 0.2;
+    transform: translateX(60%) skewX(-15deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(150%) skewX(-10deg);
+  }
 }
 
 .book-spine-crease::before {
