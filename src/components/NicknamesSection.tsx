@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Sparkles, ArrowRight, Heart } from 'lucide-react';
+import { Sparkles, ArrowRight, Heart, X } from 'lucide-react';
 import { WashiTape } from './WashiTape';
 import { ImageWithFallback } from './ImageWithFallback';
 
@@ -24,10 +24,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "❤️",
     subtitle: "My safe place and the voice of pure comfort.",
     badge: "Warmth & Care",
-    bgGradient: "bg-gradient-to-br from-[#FFF9F6] via-[#FFFDF9] to-[#FDF2F4]",
+    bgGradient: "bg-[#FDF2F4]",
     borderColor: "border-[#C87D88]/40",
     textColor: "text-[#6C2231]",
-    glowEffect: "shadow-[0_8px_30px_rgba(212,175,55,0.25)] ring-1 ring-[#D4AF37]/30",
+    glowEffect: "shadow-sm",
     accentIcon: "✨"
   },
   {
@@ -36,10 +36,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "😂",
     subtitle: "For all the silly laughs, crazy drama, and inside jokes.",
     badge: "Our Silly Side",
-    bgGradient: "bg-gradient-to-br from-[#FFFDF9] via-[#FAF6F0] to-[#FDF4F6]",
-    borderColor: "border-[#D4AF37]/45",
+    bgGradient: "bg-[#FFFDF9]",
+    borderColor: "border-[#D4AF37]/50",
     textColor: "text-[#6C2231]",
-    glowEffect: "shadow-[0_8px_30px_rgba(200,125,136,0.2)] ring-1 ring-[#C87D88]/30",
+    glowEffect: "shadow-sm",
     accentIcon: "🌸"
   },
   {
@@ -48,10 +48,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "✨",
     subtitle: "A special name for our truly unbreakable sibling bond.",
     badge: "Special Bond",
-    bgGradient: "bg-gradient-to-br from-[#F8F1F7] via-[#FFFDF9] to-[#F7E6E8]",
+    bgGradient: "bg-[#F7E6E8]",
     borderColor: "border-[#9B5DE5]/35",
     textColor: "text-[#5A235D]",
-    glowEffect: "shadow-[0_8px_30px_rgba(155,93,229,0.25)] ring-1 ring-[#9B5DE5]/30",
+    glowEffect: "shadow-sm",
     accentIcon: "⭐"
   },
   {
@@ -60,10 +60,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "👑",
     subtitle: "Whenever you take charge and give your little brother orders!",
     badge: "When You Command",
-    bgGradient: "bg-gradient-to-br from-[#FAF5EC] via-[#FFFDF9] to-[#F5ECE0]",
-    borderColor: "border-[#A75360]/40",
+    bgGradient: "bg-[#FAF6F0]",
+    borderColor: "border-[#A75360]/35",
     textColor: "text-[#6C2231]",
-    glowEffect: "shadow-[0_8px_30px_rgba(212,175,55,0.25)] ring-1 ring-[#D4AF37]/40",
+    glowEffect: "shadow-sm",
     accentIcon: "👑"
   },
   {
@@ -72,10 +72,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "🌙",
     subtitle: "A quiet, gentle presence that brightens up the darkest nights.",
     badge: "Quiet Comfort",
-    bgGradient: "bg-gradient-to-br from-[#ECE8F5] via-[#F4F0FB] to-[#FFFDF9]",
-    borderColor: "border-[#8D72B8]/45",
+    bgGradient: "bg-[#ECE8F5]",
+    borderColor: "border-[#8D72B8]/40",
     textColor: "text-[#4A3B69]",
-    glowEffect: "shadow-[0_8px_32px_rgba(141,114,184,0.3)] ring-1 ring-[#8D72B8]/40",
+    glowEffect: "shadow-sm",
     accentIcon: "✨"
   },
   {
@@ -84,10 +84,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "✨",
     subtitle: "Guiding me with advice, listening, and standing by me always.",
     badge: "Through Dark Days",
-    bgGradient: "bg-gradient-to-br from-[#FDF6E2] via-[#FFFDF9] to-[#FAF1D6]",
-    borderColor: "border-[#D4AF37]/60",
+    bgGradient: "bg-[#FDF6E2]",
+    borderColor: "border-[#D4AF37]/55",
     textColor: "text-[#6C2231]",
-    glowEffect: "shadow-[0_10px_35px_rgba(212,175,55,0.4)] ring-2 ring-[#D4AF37]/50",
+    glowEffect: "shadow-sm",
     accentIcon: "💛"
   },
   {
@@ -96,10 +96,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "❤️",
     subtitle: "Always scolding, caring, feeding, and looking out for me like a mother.",
     badge: "Selfless Care",
-    bgGradient: "bg-gradient-to-br from-[#FDF0F3] via-[#FFFDF9] to-[#FCE6EB]",
-    borderColor: "border-[#C87D88]/50",
+    bgGradient: "bg-[#FCEEF2]",
+    borderColor: "border-[#C87D88]/45",
     textColor: "text-[#6C2231]",
-    glowEffect: "shadow-[0_10px_35px_rgba(200,125,136,0.35)] ring-1 ring-[#C87D88]/40",
+    glowEffect: "shadow-sm",
     accentIcon: "🌸"
   },
   {
@@ -108,10 +108,10 @@ const nicknamesSequence: NicknameData[] = [
     emoji: "❤️",
     subtitle: "My dearest non-blood sister chosen with the heart. Forever my Bangarammmm.",
     badge: "Forever My Sister",
-    bgGradient: "bg-gradient-to-br from-[#FAF2DE] via-[#FFFDF9] to-[#F7E6E8]",
+    bgGradient: "bg-gradient-to-r from-[#F7E6E8] to-[#FAF3E0]",
     borderColor: "border-[#D4AF37]",
     textColor: "text-[#6C2231]",
-    glowEffect: "shadow-[0_12px_45px_rgba(212,175,55,0.6)] ring-2 ring-[#D4AF37]",
+    glowEffect: "shadow-[0_4px_20px_rgba(212,175,55,0.4)] ring-2 ring-[#D4AF37]",
     accentIcon: "💖"
   }
 ];
@@ -124,31 +124,44 @@ interface NicknamesSectionProps {
 export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNext }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animStage, setAnimStage] = useState<'idle' | 'out' | 'in'>('idle');
+  const [variation, setVariation] = useState<0 | 1 | 2 | 3>(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [revealedNames, setRevealedNames] = useState<number[]>([0]);
+  const [showLightSweep, setShowLightSweep] = useState(false);
+  const [revealedIndices, setRevealedIndices] = useState<number[]>([0]);
+
+  // "Tie Rakhi Again" 3D Modal Experience
+  const [showTieRakhiModal, setShowTieRakhiModal] = useState(false);
+  const [rakhiStage, setRakhiStage] = useState<'enter' | 'closer' | 'settle'>('enter');
+
+  // Final Page Turn Animation
+  const [isPageTurning, setIsPageTurning] = useState(false);
 
   const currentNickname = nicknamesSequence[currentIndex];
   const isLast = currentIndex === nicknamesSequence.length - 1;
 
+  // Handle Nickname 3D Reveal with 4 Unpredictable Variations
   const handleRevealNext = () => {
     if (isAnimating || isLast) return;
 
     setIsAnimating(true);
+    const nextVar = ((variation + 1) % 4) as 0 | 1 | 2 | 3;
+    setVariation(nextVar);
     setAnimStage('out');
+    setShowLightSweep(true);
 
-    // 0.65s: Swap to next card and begin 3D entrance
+    // 0.55s: Swap to next card & start 3D entrance
     setTimeout(() => {
-      const nextIndex = currentIndex + 1;
-      setCurrentIndex(nextIndex);
-      setRevealedNames((prev) => Array.from(new Set([...prev, nextIndex])));
+      const nextIdx = currentIndex + 1;
+      setCurrentIndex(nextIdx);
+      setRevealedIndices((prev) => Array.from(new Set([...prev, nextIdx])));
       setAnimStage('in');
 
-      // If revealing the final "Bangaram ❤️", trigger celebratory particle burst
-      if (nextIndex === nicknamesSequence.length - 1) {
+      // If revealing the final "Bangaram ❤️", trigger delicate celebratory particle burst
+      if (nextIdx === nicknamesSequence.length - 1) {
         try {
           confetti({
-            particleCount: 65,
-            spread: 80,
+            particleCount: 50,
+            spread: 75,
             origin: { y: 0.65 },
             colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FBF4DE', '#F472B6']
           });
@@ -156,17 +169,73 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
           // ignore
         }
       }
-    }, 650);
+    }, 550);
 
-    // 1.4s: Settle and re-enable button
+    // 1.2s: Settle and re-enable button
     setTimeout(() => {
       setAnimStage('idle');
+      setShowLightSweep(false);
       setIsAnimating(false);
-    }, 1400);
+    }, 1200);
+  };
+
+  // Trigger "Tie Rakhi Again" 3D Experience
+  const handleTieRakhiAgain = () => {
+    setShowTieRakhiModal(true);
+    setRakhiStage('enter');
+
+    // Unexpected 3D moment: moves closer for a moment and glows (0.8s)
+    setTimeout(() => {
+      setRakhiStage('closer');
+      try {
+        confetti({
+          particleCount: 45,
+          spread: 60,
+          origin: { y: 0.5 },
+          colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FAF6F0']
+        });
+      } catch {
+        // ignore
+      }
+    }, 800);
+
+    // Settle smoothly back (1.8s)
+    setTimeout(() => {
+      setRakhiStage('settle');
+    }, 1800);
+  };
+
+  // Handle Final Continue Button with 3D Scrapbook Page Turn
+  const handleFinalContinue = () => {
+    setIsPageTurning(true);
+    setTimeout(() => {
+      onNext();
+    }, 450);
+  };
+
+  // Select dynamic CSS class based on active variation
+  const getAnimClass = () => {
+    if (animStage === 'out') {
+      if (variation === 0) return 'nickname-var-a-out';
+      if (variation === 1) return 'nickname-var-b-out';
+      if (variation === 2) return 'nickname-var-c-out';
+      return 'nickname-var-d-out';
+    }
+    if (animStage === 'in') {
+      if (variation === 0) return 'nickname-var-a-in';
+      if (variation === 1) return 'nickname-var-b-in';
+      if (variation === 2) return 'nickname-var-c-in';
+      return 'nickname-var-d-in';
+    }
+    return 'hover:scale-101 hover:-translate-y-0.5';
   };
 
   return (
-    <div className="w-full flex flex-col items-center text-center select-none">
+    <div
+      className={`w-full flex flex-col items-center text-center select-none transition-all duration-400 ${
+        isPageTurning ? 'memory-turn-forward-out pointer-events-none' : ''
+      }`}
+    >
 
       {/* 1. Photograph in Polaroid Scrapbook Frame */}
       <div className="relative inline-block max-w-sm sm:max-w-md mx-auto my-2">
@@ -197,114 +266,107 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
         </p>
       </div>
 
-      {/* 4. 3D Floating Interactive Nickname Card Stage */}
-      <div className="w-full max-w-lg my-6 flex flex-col items-center relative perspective-1200">
+      {/* 4. Compact 3D Floating Nickname Card (Preserved Original Small Size) */}
+      <div className="w-full max-w-md my-4 flex flex-col items-center relative perspective-1200">
         
-        {/* Floating 3D Particles during transformation */}
+        {/* Subtle Floating Particles during transition */}
         {isAnimating && (
           <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center">
-            <div className="absolute text-xl animate-particle-orbit [animation-delay:0ms]">✨</div>
-            <div className="absolute text-lg animate-particle-orbit [animation-delay:200ms] text-[#9B5DE5]">💜</div>
-            <div className="absolute text-xl animate-particle-orbit [animation-delay:400ms] text-[#D4AF37]">🌸</div>
-            <div className="absolute text-base animate-particle-orbit [animation-delay:600ms]">❤️</div>
-            <div className="absolute text-lg animate-particle-orbit [animation-delay:800ms] text-[#D4AF37]">⭐</div>
+            <div className="absolute text-sm animate-particle-orbit [animation-delay:0ms]">✨</div>
+            <div className="absolute text-xs animate-particle-orbit [animation-delay:200ms] text-[#9B5DE5]">💜</div>
+            <div className="absolute text-sm animate-particle-orbit [animation-delay:400ms] text-[#D4AF37]">🌸</div>
+            <div className="absolute text-xs animate-particle-orbit [animation-delay:600ms]">❤️</div>
           </div>
         )}
 
-        {/* 3D Transformable Nickname Card */}
+        {/* The Original Compact Card */}
         <div
-          className={`w-full p-6 sm:p-8 rounded-3xl ${currentNickname.bgGradient} border-2 ${currentNickname.borderColor} ${currentNickname.glowEffect} transform-style-3d transition-all duration-300 relative overflow-hidden ${
-            animStage === 'out'
-              ? 'nickname-card-out'
-              : animStage === 'in'
-              ? 'nickname-card-in'
-              : 'hover:scale-102 hover:-translate-y-1'
-          }`}
+          className={`w-full p-4 sm:p-5 rounded-2xl ${currentNickname.bgGradient} border-2 ${currentNickname.borderColor} ${currentNickname.glowEffect} transform-style-3d transition-all duration-300 relative overflow-hidden ${getAnimClass()}`}
         >
-          {/* Subtle Ambient Card Top Shimmer */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/40 rounded-full blur-xl pointer-events-none" />
+          {/* 3D Diagonal Light Sweep */}
+          {showLightSweep && <div className="card-light-sweep" />}
 
-          {/* Card Header: Category & Counter */}
-          <div className="flex items-center justify-between mb-4 border-b border-[#C87D88]/15 pb-3">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#C87D88]/20 shadow-2xs">
-              <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-              <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-[#6C2231]">
-                {currentNickname.badge}
-              </span>
-            </div>
+          {/* Card Header: Badge + Counter */}
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-sans font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/80 border border-[#C87D88]/20 text-[#7E7275]">
+              {currentNickname.badge}
+            </span>
 
-            <span className="text-xs font-sans font-bold text-[#7E7275] tracking-widest uppercase">
+            <span className="text-[11px] font-sans font-bold text-[#7E7275]/80 tracking-widest uppercase">
               {currentIndex + 1} of {nicknamesSequence.length}
             </span>
           </div>
 
           {/* Nickname Title (Visual Focus) */}
-          <div className="my-4 py-2 flex flex-col items-center justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <h3 className={`font-handwritten text-4xl sm:text-6xl font-bold ${currentNickname.textColor} tracking-wide filter drop-shadow-xs`}>
-                {currentNickname.name}
-              </h3>
-              <span className="text-3xl sm:text-4xl animate-bounce [animation-duration:2s]">
-                {currentNickname.emoji}
-              </span>
-            </div>
-
-            {/* Subtitle / Meaning Description */}
-            <p className="font-serif-heading italic text-lg sm:text-xl text-[#524749] mt-3 max-w-sm mx-auto leading-snug">
-              “{currentNickname.subtitle}”
-            </p>
+          <div className="flex items-center justify-center gap-2 py-1">
+            <span className={`font-handwritten text-2xl sm:text-3xl font-bold ${currentNickname.textColor}`}>
+              {currentNickname.name}
+            </span>
+            <span className="text-xl">{currentNickname.emoji}</span>
           </div>
 
-          {/* Subtle Bottom Accent */}
-          <div className="mt-4 pt-3 border-t border-[#C87D88]/15 flex items-center justify-center gap-2 text-xs text-[#7E7275]">
-            <span>{currentNickname.accentIcon}</span>
-            <span className="font-sans italic">A name only I get to call you</span>
-            <span>{currentNickname.accentIcon}</span>
-          </div>
+          {/* Subtitle snippet */}
+          <p className="font-serif-heading italic text-xs sm:text-sm text-[#524749] mt-1 text-center">
+            “{currentNickname.subtitle}”
+          </p>
         </div>
 
-        {/* Action Button: Reveal Another Name vs Continue */}
-        <div className="mt-6 flex flex-col items-center gap-3 w-full">
-          {!isLast ? (
+        {/* Reveal Next Name Button */}
+        {!isLast ? (
+          <div className="mt-4">
             <button
               onClick={handleRevealNext}
               disabled={isAnimating}
-              className="inline-flex items-center justify-center gap-2.5 px-7 sm:px-9 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-sm sm:text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer border border-[#D4AF37]/40 disabled:opacity-60 disabled:pointer-events-none"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F7E6E8] text-[#6C2231] hover:bg-[#6C2231] hover:text-[#FAF6F0] transition-all text-xs font-semibold uppercase tracking-widest shadow-xs border border-[#C87D88]/30 cursor-pointer disabled:opacity-60 disabled:pointer-events-none active:scale-95"
             >
-              <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-              <span>Reveal Another Name → ({currentIndex + 1}/{nicknamesSequence.length})</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>Reveal another name → ({currentIndex + 1}/{nicknamesSequence.length})</span>
             </button>
-          ) : (
-            /* Finale Card & Continue Button */
-            <div className="w-full animate-fade-in [animation-duration:600ms] space-y-5">
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-[#FAF2DE]/80 via-[#FFFDF9] to-[#F7E6E8]/70 border border-[#D4AF37]/50 shadow-sm">
-                <Heart className="w-6 h-6 text-[#D4AF37] fill-[#D4AF37] mx-auto mb-2 animate-pulse" />
-                <p className="font-serif-heading text-xl sm:text-2xl text-[#6C2231] font-semibold leading-relaxed">
-                  “Whatever I call you... you're still my dearest Akkaaa who became true family to me.”
-                </p>
-                <p className="font-handwritten text-3xl sm:text-4xl text-[#6C2231] font-bold mt-2">
-                  Forever My Bangarammmm ❤️
-                </p>
-              </div>
+          </div>
+        ) : (
+          /* Sequence Complete: Emotional Note + "Tie Rakhi Again" + Final Continue Button */
+          <div className="w-full animate-fade-in [animation-duration:500ms] mt-4 space-y-4">
+            <p className="font-sans text-xs sm:text-sm text-[#7E7275] italic">
+              “Okay... I think that's enough names for one person. 😂❤️”
+            </p>
 
+            <div className="p-4 rounded-xl bg-gradient-to-br from-[#F7E6E8]/70 via-[#FFFDF9] to-[#FBF4DE]/60 border border-[#D4AF37]/40 shadow-xs">
+              <p className="font-serif-heading text-lg sm:text-xl text-[#6C2231] font-semibold leading-relaxed">
+                “Whatever I call you... you're still my dearest Akkaaa who became true family to me.”
+              </p>
+              <p className="font-handwritten text-2xl sm:text-3xl text-[#6C2231] font-bold mt-1">
+                Bangarammmm ❤️ (Akkaaa)
+              </p>
+            </div>
+
+            {/* Special Action: "Tie Rakhi Again" */}
+            <div className="pt-1">
               <button
-                onClick={onNext}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group border border-[#D4AF37]/40"
+                onClick={handleTieRakhiAgain}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#FBF4DE] to-[#C87D88] text-[#6C2231] hover:shadow-md hover:scale-105 active:scale-95 transition-all text-xs font-bold uppercase tracking-wider border border-[#D4AF37]/50 shadow-xs cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-[#6C2231]" />
+                <span>Tie Rakhi Again ❤️</span>
+              </button>
+            </div>
+
+            {/* Final Action: Continue Our Story with 3D Page Turn */}
+            <div className="pt-2">
+              <button
+                onClick={handleFinalContinue}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group border border-[#D4AF37]/30"
               >
                 <span>Continue Our Story →</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
-        {/* Small Scrapbook History Chips */}
-        {revealedNames.length > 1 && (
-          <div className="mt-8 pt-4 border-t border-[#C87D88]/20 w-full flex flex-wrap items-center justify-center gap-2">
-            <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-[#7E7275] mr-1 block w-full sm:w-auto">
-              Discovered:
-            </span>
-            {revealedNames.map((idx) => {
+        {/* Small Discovered Chips */}
+        {revealedIndices.length > 1 && (
+          <div className="mt-6 pt-3 border-t border-[#C87D88]/15 w-full flex flex-wrap items-center justify-center gap-1.5">
+            {revealedIndices.map((idx) => {
               const item = nicknamesSequence[idx];
               return (
                 <button
@@ -313,20 +375,22 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
                     if (!isAnimating && idx !== currentIndex) {
                       setIsAnimating(true);
                       setAnimStage('out');
+                      setShowLightSweep(true);
                       setTimeout(() => {
                         setCurrentIndex(idx);
                         setAnimStage('in');
-                      }, 650);
+                      }, 550);
                       setTimeout(() => {
                         setAnimStage('idle');
+                        setShowLightSweep(false);
                         setIsAnimating(false);
-                      }, 1400);
+                      }, 1200);
                     }
                   }}
-                  className={`px-3 py-1 rounded-full text-xs font-handwritten font-bold border transition-all cursor-pointer ${
+                  className={`px-2.5 py-0.5 rounded-full text-xs font-handwritten font-bold border transition-all cursor-pointer ${
                     idx === currentIndex
-                      ? 'bg-[#6C2231] text-[#FAF6F0] border-[#D4AF37] scale-105 shadow-xs'
-                      : 'bg-white/75 text-[#6C2231] border-[#C87D88]/30 hover:bg-[#F7E6E8]'
+                      ? 'bg-[#6C2231] text-[#FAF6F0] border-[#D4AF37] scale-105 shadow-2xs'
+                      : 'bg-white/80 text-[#6C2231] border-[#C87D88]/25 hover:bg-[#F7E6E8]'
                   }`}
                 >
                   {item.name} {item.emoji}
@@ -337,6 +401,102 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
         )}
 
       </div>
+
+      {/* ==========================================================================
+          “Tie Rakhi Again” 3D Cinematic Experience Modal Overlay
+          ========================================================================== */}
+      {showTieRakhiModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none animate-fade-in [animation-duration:400ms]">
+          {/* Depth of Field Backdrop: Softly Blurred & Dimmed */}
+          <div
+            onClick={() => setShowTieRakhiModal(false)}
+            className="absolute inset-0 bg-[#200E1C]/85 backdrop-blur-md transition-opacity duration-500"
+          />
+
+          {/* Radiant Golden/Purple Ambient Aura */}
+          <div
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-all duration-700 ${
+              rakhiStage === 'closer'
+                ? 'w-96 h-96 bg-radial from-[#D4AF37]/45 via-[#9B5DE5]/30 to-transparent blur-3xl opacity-100 scale-125'
+                : 'w-72 h-72 bg-radial from-[#D4AF37]/25 via-[#9B5DE5]/20 to-transparent blur-2xl opacity-80 scale-100'
+            }`}
+          />
+
+          {/* 3D Rakhi Container */}
+          <div className="relative z-20 max-w-sm w-full p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#2A1528] via-[#1E0D1C] to-[#160814] border border-[#D4AF37]/50 shadow-2xl text-center flex flex-col items-center justify-center space-y-5">
+            
+            {/* Close Button */}
+            <button
+              onClick={() => setShowTieRakhiModal(false)}
+              className="absolute top-4 right-4 text-[#FAF6F0]/60 hover:text-[#FAF6F0] transition-colors p-1 rounded-full hover:bg-white/10"
+              aria-label="Close modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* 3D Sacred Rakhi Graphic with Unexpected Depth Zoom */}
+            <div
+              className={`transform-style-3d transition-all duration-700 ease-out py-2 ${
+                rakhiStage === 'closer'
+                  ? 'scale-125 translate-z-10 rotate-y-12 drop-shadow-[0_0_30px_rgba(212,175,55,0.8)]'
+                  : 'scale-100 rotate-y-0 drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]'
+              }`}
+            >
+              <div className="relative flex items-center justify-center">
+                {/* Thread Left */}
+                <div className="w-12 sm:w-16 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_6px_rgba(212,175,55,0.8)]" />
+
+                {/* Center Sacred Rosette */}
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-[#FBF4DE] to-[#9B5DE5] ring-4 ring-[#D4AF37]/60 shadow-[0_0_35px_rgba(212,175,55,0.6)] flex items-center justify-center animate-pulse-glow">
+                  <div className="w-full h-full rounded-full bg-[#6C2231] border-2 border-[#D4AF37] flex flex-col items-center justify-center text-[#FAF6F0] shadow-inner">
+                    <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
+                    <span className="text-[8px] font-bold tracking-widest uppercase text-[#FBF4DE] mt-0.5">
+                      RAKHI
+                    </span>
+                  </div>
+
+                  {/* Decorative Outer Beads */}
+                  <div className="absolute -top-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
+                  <div className="absolute -bottom-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
+                  <div className="absolute -left-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
+                  <div className="absolute -right-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
+                </div>
+
+                {/* Thread Right */}
+                <div className="w-12 sm:w-16 h-1 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_6px_rgba(212,175,55,0.8)]" />
+              </div>
+            </div>
+
+            {/* Emotional Message */}
+            <div className="space-y-2 pt-1">
+              <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">
+                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                <span>Sacred Bond Renewed</span>
+                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+              </div>
+
+              <h3 className="font-serif-heading text-xl sm:text-2xl font-bold text-[#FFFDF9] leading-snug">
+                “Some moments are worth living again. ❤️”
+              </h3>
+
+              <p className="font-handwritten text-xl sm:text-2xl text-[#E9D5FF] pt-1">
+                For My Dearest Akkaaa (Bangarammmm)
+              </p>
+            </div>
+
+            {/* Close / Return Button */}
+            <div className="pt-2">
+              <button
+                onClick={() => setShowTieRakhiModal(false)}
+                className="px-6 py-2 rounded-full bg-[#D4AF37] text-[#241126] font-sans font-bold text-xs shadow-md hover:bg-[#FBF4DE] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              >
+                Close & Return to Memory Book
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
 
     </div>
   );

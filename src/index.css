@@ -173,76 +173,224 @@
 }
 
 /* ==========================================================================
-   3D Nickname Reveal Keyframes & Transformations
+   3D Nickname Reveal 4-Variation Keyframes & Transformations
    ========================================================================== */
 
-@keyframes card3DOut {
+/* Variation A: 3D Card Flip (Y-axis 90° flip) */
+@keyframes varAOut {
   0% {
     opacity: 1;
     transform: translateZ(0) rotateY(0deg) scale(1);
-    filter: blur(0px);
   }
-  40% {
+  50% {
     opacity: 0.8;
-    transform: translateZ(-80px) rotateY(-45deg) translateY(-8px) scale(0.94);
+    transform: translateZ(-60px) rotateY(-50deg) scale(0.96);
   }
   100% {
     opacity: 0;
-    transform: translateZ(-160px) rotateY(-90deg) translateY(-14px) scale(0.82);
-    filter: blur(2px);
+    transform: translateZ(-130px) rotateY(-90deg) scale(0.88);
   }
 }
 
-@keyframes card3DIn {
+@keyframes varAIn {
   0% {
     opacity: 0;
-    transform: translateZ(-160px) rotateY(90deg) translateY(14px) scale(0.82);
-    filter: blur(2px);
+    transform: translateZ(-130px) rotateY(90deg) scale(0.88);
   }
-  55% {
+  60% {
     opacity: 0.95;
-    transform: translateZ(20px) rotateY(-6deg) translateY(-2px) scale(1.03);
-    filter: blur(0px);
+    transform: translateZ(15px) rotateY(-5deg) scale(1.02);
   }
   80% {
-    transform: translateZ(0px) rotateY(2deg) translateY(0px) scale(0.99);
+    transform: translateZ(0) rotateY(2deg) scale(0.99);
   }
   100% {
     opacity: 1;
-    transform: translateZ(0) rotateY(0deg) translateY(0) scale(1);
+    transform: translateZ(0) rotateY(0deg) scale(1);
   }
 }
 
-.nickname-card-out {
-  animation: card3DOut 650ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.nickname-var-a-out {
+  animation: varAOut 550ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
   transform-origin: center center;
-  will-change: transform, opacity;
 }
 
-.nickname-card-in {
-  animation: card3DIn 750ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+.nickname-var-a-in {
+  animation: varAIn 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transform-origin: center center;
-  will-change: transform, opacity;
+}
+
+/* Variation B: Depth Slide & Emerge */
+@keyframes varBOut {
+  0% {
+    opacity: 1;
+    transform: translateZ(0) scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateZ(-160px) translateY(-16px) scale(0.85);
+    filter: blur(3px);
+  }
+}
+
+@keyframes varBIn {
+  0% {
+    opacity: 0;
+    transform: translateZ(-160px) translateY(16px) scale(0.85);
+    filter: blur(3px);
+  }
+  70% {
+    opacity: 0.95;
+    transform: translateZ(15px) translateY(-2px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateZ(0) translateY(0) scale(1);
+  }
+}
+
+.nickname-var-b-out {
+  animation: varBOut 550ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.nickname-var-b-in {
+  animation: varBIn 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Variation C: Slight Tilt + Light Sweep */
+@keyframes varCOut {
+  0% {
+    opacity: 1;
+    transform: rotateZ(0deg) rotateY(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotateZ(-4deg) rotateY(-35deg) scale(0.92);
+  }
+}
+
+@keyframes varCIn {
+  0% {
+    opacity: 0;
+    transform: rotateZ(4deg) rotateY(35deg) scale(0.92);
+  }
+  70% {
+    opacity: 0.95;
+    transform: rotateZ(-1deg) rotateY(-3deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateZ(0deg) rotateY(0deg) scale(1);
+  }
+}
+
+.nickname-var-c-out {
+  animation: varCOut 550ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.nickname-var-c-in {
+  animation: varCIn 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Variation D: Particle Dissolve & Soft Materialize */
+@keyframes varDOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  60% {
+    filter: brightness(1.2) blur(1px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+    filter: blur(3px);
+  }
+}
+
+@keyframes varDIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+    filter: blur(3px);
+  }
+  60% {
+    opacity: 0.95;
+    filter: brightness(1.1) blur(0px);
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.nickname-var-d-out {
+  animation: varDOut 550ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.nickname-var-d-in {
+  animation: varDIn 650ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3D Diagonal Light Sweep Across Card */
+@keyframes lightSweepAcross {
+  0% {
+    transform: translateX(-120%) skewX(-25deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(200%) skewX(-25deg);
+    opacity: 0;
+  }
+}
+
+.card-light-sweep {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(212, 175, 55, 0.6) 50%,
+    rgba(155, 93, 229, 0.4) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 30;
+  animation: lightSweepAcross 800ms ease-out forwards;
 }
 
 /* 3D Orbiting Particle Burst */
 @keyframes particleOrbit {
   0% {
-    transform: rotate(0deg) translateX(45px) rotate(0deg) scale(0.6);
+    transform: rotate(0deg) translateX(40px) rotate(0deg) scale(0.5);
     opacity: 0;
   }
   50% {
     opacity: 1;
-    transform: rotate(180deg) translateX(70px) rotate(-180deg) scale(1.1);
+    transform: rotate(180deg) translateX(60px) rotate(-180deg) scale(1);
   }
   100% {
-    transform: rotate(360deg) translateX(90px) rotate(-360deg) scale(0.4);
+    transform: rotate(360deg) translateX(75px) rotate(-360deg) scale(0.4);
     opacity: 0;
   }
 }
 
 .animate-particle-orbit {
-  animation: particleOrbit 1400ms ease-out forwards;
+  animation: particleOrbit 1200ms ease-out forwards;
 }
 
 /* ==========================================================================
