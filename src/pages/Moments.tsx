@@ -1,8 +1,7 @@
 import React from 'react';
 import { PageTransition } from '../components/PageTransition';
-import { specialMoments, hiddenCards } from '../data/specialMoments';
-import { HiddenSecretCard } from '../components/HiddenSecretCard';
-import { Sparkles, Moon, Heart, Lock } from 'lucide-react';
+import { specialMoments } from '../data/specialMoments';
+import { Sparkles, Moon, Heart } from 'lucide-react';
 import { ImageWithFallback } from '../components/ImageWithFallback';
 
 export const Moments: React.FC = () => {
@@ -28,9 +27,9 @@ export const Moments: React.FC = () => {
           </p>
         </div>
 
-        {/* Feature 1: The Memorable Night (Nighttime Atmosphere Card) */}
+        {/* The Memorable Night Story (Nighttime Atmosphere Card) */}
         {nightMemory && (
-          <div className="mb-16">
+          <div className="mb-12">
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-b from-[#241E2F] to-[#171320] text-[#FAF6F0] p-6 sm:p-10 md:p-12 shadow-2xl border border-[#D4AF37]/30">
               
               {/* Starry Night Sky Accents */}
@@ -87,28 +86,6 @@ export const Moments: React.FC = () => {
             </div>
           </div>
         )}
-
-        {/* Feature 2: Hidden Memory Cards (3 Secret Wax-Sealed Cards) */}
-        <div className="mt-12">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF6F0] border border-[#D4AF37]/40 text-[#6C2231] text-xs font-bold uppercase tracking-widest mb-2">
-              <Lock className="w-3 h-3 text-[#D4AF37]" />
-              <span>Surprise Sealed Notes</span>
-            </div>
-            <h2 className="font-serif-heading text-2xl sm:text-3xl font-bold text-[#6C2231]">
-              Three Things I Kept in My Heart
-            </h2>
-            <p className="font-handwritten text-xl text-[#7E7275] mt-1">
-              Tap each sealed card to reveal what I never said out loud.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {hiddenCards.map((card) => (
-              <HiddenSecretCard key={card.id} card={card} />
-            ))}
-          </div>
-        </div>
 
       </div>
     </PageTransition>
