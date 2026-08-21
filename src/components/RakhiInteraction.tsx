@@ -1,42 +1,74 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { Heart, Sparkles, ShieldCheck } from 'lucide-react';
+import { Heart, Sparkles, ShieldCheck, X, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ImageWithFallback } from './ImageWithFallback';
+
+// 6 Keepsake Orbiting Memories
+const orbitingMemories = [
+  { id: 1, title: "Our First Chapter", img: "/images/journey.jpg", anim: "animate-memory-orbit-1" },
+  { id: 2, title: "Birthday Joy", img: "/images/birthday1.jpg", anim: "animate-memory-orbit-2" },
+  { id: 3, title: "The Memorable Night", img: "/images/night-memory.jpg", anim: "animate-memory-orbit-3" },
+  { id: 4, title: "Bike Ride Adventures", img: "/images/bike_ride.jpg", anim: "animate-memory-orbit-4" },
+  { id: 5, title: "Hand Art & Silly Jokes", img: "/images/hand_art.jpg", anim: "animate-memory-orbit-5" },
+  { id: 6, title: "Pure Sisterly Care", img: "/images/maa_wrist.png", anim: "animate-memory-orbit-6" },
+];
 
 export const RakhiInteraction: React.FC = () => {
+  const navigate = useNavigate();
   const [tied, setTied] = useState(false);
-  const [is3DActive, setIs3DActive] = useState(false);
-  const [rakhi3DStage, setRakhi3DStage] = useState<'emerge' | 'zoom' | 'settle'>('emerge');
+  const [isCinematicActive, setIsCinematicActive] = useState(false);
+  const [sequenceStage, setSequenceStage] = useState<'emerge' | 'orbit' | 'converge' | 'reveal'>('emerge');
 
   const handleTieRakhi = () => {
-    if (is3DActive) return;
-    setIs3DActive(true);
-    setRakhi3DStage('emerge');
+    if (isCinematicActive) return;
+    setIsCinematicActive(true);
+    setSequenceStage('emerge');
 
-    // 0.6s: Unexpected 3D moment - moves closer, glows, and releases particles
+    // Stage 1 -> Stage 2: Memories start orbiting in 3D around Rakhi (0.7s)
     setTimeout(() => {
-      setRakhi3DStage('zoom');
+      setSequenceStage('orbit');
       try {
         confetti({
-          particleCount: 55,
-          spread: 75,
+          particleCount: 40,
+          spread: 60,
           origin: { y: 0.5 },
+          colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FAF6F0']
+        });
+      } catch {
+        // ignore
+      }
+    }, 700);
+
+    // Stage 2 -> Stage 3: Memories converge inward into the glowing Rakhi (3.4s)
+    setTimeout(() => {
+      setSequenceStage('converge');
+      try {
+        confetti({
+          particleCount: 60,
+          spread: 85,
+          origin: { y: 0.55 },
           colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FBF4DE', '#F472B6']
         });
       } catch {
         // ignore
       }
-    }, 650);
+    }, 3400);
 
-    // 1.8s: Settle back into position
+    // Stage 3 -> Stage 4: Emotional Reveal & Grand Settle (4.6s)
     setTimeout(() => {
-      setRakhi3DStage('settle');
-    }, 1800);
-
-    // 2.6s: Complete the ritual and transition to the renewed promise card
-    setTimeout(() => {
-      setIs3DActive(false);
+      setSequenceStage('reveal');
       setTied(true);
-    }, 2600);
+    }, 4600);
+  };
+
+  const handleCloseModal = () => {
+    setIsCinematicActive(false);
+  };
+
+  const handleContinueToLetter = () => {
+    setIsCinematicActive(false);
+    navigate('/letter');
   };
 
   return (
@@ -47,9 +79,8 @@ export const RakhiInteraction: React.FC = () => {
       <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-[#D4AF37]/50 rounded-bl-lg pointer-events-none" />
       <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-[#D4AF37]/50 rounded-br-lg pointer-events-none" />
 
-      {/* SVG Rakhi Visual */}
+      {/* Static / Base Rakhi Visual */}
       <div className="relative max-w-sm mx-auto my-6 py-4 flex flex-col items-center justify-center">
-        {/* Animated Rakhi Thread */}
         <div className="relative w-full flex items-center justify-center">
           {/* Thread Line Left */}
           <div
@@ -58,7 +89,7 @@ export const RakhiInteraction: React.FC = () => {
             }`}
           />
 
-          {/* Center Emblem / Dial */}
+          {/* Center Emblem */}
           <div
             className={`relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center transition-all duration-500 ${
               tied
@@ -97,10 +128,9 @@ export const RakhiInteraction: React.FC = () => {
           />
         </div>
 
-        {/* Small Tassels */}
         {tied && (
           <div className="flex gap-4 mt-2 animate-fade-in">
-            <span className="text-xs font-handwritten text-[#6C2231]">✦ Golden Thread ✦</span>
+            <span className="text-xs font-handwritten text-[#6C2231]">✦ Golden Thread Tied Forever ✦</span>
           </div>
         )}
       </div>
@@ -113,7 +143,7 @@ export const RakhiInteraction: React.FC = () => {
           </p>
           <button
             onClick={handleTieRakhi}
-            disabled={is3DActive}
+            disabled={isCinematicActive}
             className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group disabled:opacity-60 disabled:pointer-events-none border border-[#D4AF37]/40"
           >
             <Sparkles className="w-5 h-5 text-[#D4AF37] group-hover:rotate-45 transition-transform" />
@@ -140,86 +170,201 @@ export const RakhiInteraction: React.FC = () => {
             </p>
           </div>
 
-          <button
-            onClick={() => setTied(false)}
-            className="text-xs uppercase tracking-wider font-semibold text-[#7E7275] hover:text-[#6C2231] transition-colors underline underline-offset-4 pt-2 cursor-pointer"
-          >
-            Tie Rakhi Again
-          </button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
+            <button
+              onClick={handleTieRakhi}
+              className="text-xs uppercase tracking-wider font-semibold text-[#7E7275] hover:text-[#6C2231] transition-colors underline underline-offset-4 cursor-pointer"
+            >
+              Replay 3D Ceremony
+            </button>
+            <button
+              onClick={() => navigate('/letter')}
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#6C2231] text-[#FAF6F0] text-xs font-bold uppercase tracking-widest hover:bg-[#842D3D] shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            >
+              <span>Read Final Letter →</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
+            </button>
+          </div>
         </div>
       )}
 
       {/* ==========================================================================
-          3D Cinematic "Tie Rakhi Again" Experience Overlay
+          🌟 THE GRAND 3D CINEMATIC “TIE RAKHI AGAIN” EXPERIENCE
+          ✨ 3D cinematic reveal | 🎀 3D Rakhi | 🖼️ Floating 3D Depth | ❤️ Memories Orbit | 💜 3D Transformation
           ========================================================================== */}
-      {is3DActive && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none animate-fade-in [animation-duration:350ms]">
-          {/* Depth of Field Backdrop: Softly Blurred & Dimmed */}
-          <div className="absolute inset-0 bg-[#1D0C1A]/85 backdrop-blur-md transition-opacity duration-500" />
-
-          {/* Radiant Center Aura */}
+      {isCinematicActive && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 select-none animate-fade-in [animation-duration:400ms]">
+          
+          {/* Depth of Field Backdrop */}
           <div
-            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-all duration-700 ${
-              rakhi3DStage === 'zoom'
-                ? 'w-[420px] h-[420px] sm:w-[540px] sm:h-[540px] bg-radial from-[#D4AF37]/45 via-[#9B5DE5]/30 to-transparent blur-3xl opacity-100 scale-125'
-                : 'w-72 h-72 bg-radial from-[#D4AF37]/25 via-[#9B5DE5]/20 to-transparent blur-2xl opacity-80 scale-100'
+            onClick={handleCloseModal}
+            className="absolute inset-0 bg-[#160814]/90 backdrop-blur-lg transition-opacity duration-700"
+          />
+
+          {/* Radiant Cosmic Golden/Purple Ambient Lighting */}
+          <div
+            className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none transition-all duration-1000 ${
+              sequenceStage === 'orbit' || sequenceStage === 'converge'
+                ? 'w-[500px] h-[500px] sm:w-[650px] sm:h-[650px] bg-radial from-[#D4AF37]/50 via-[#9B5DE5]/35 to-transparent blur-3xl opacity-100 scale-125'
+                : 'w-80 h-80 bg-radial from-[#D4AF37]/30 via-[#9B5DE5]/20 to-transparent blur-2xl opacity-80 scale-100'
             }`}
           />
 
-          {/* 3D Rakhi Container */}
-          <div className="relative z-20 max-w-sm w-full p-8 rounded-3xl bg-gradient-to-b from-[#2A1528] via-[#1E0D1C] to-[#160814] border border-[#D4AF37]/50 shadow-2xl text-center flex flex-col items-center justify-center space-y-6">
-            
-            {/* 3D Sacred Rakhi Graphic with Unexpected Depth Zoom */}
+          {/* Close Button */}
+          <button
+            onClick={handleCloseModal}
+            className="absolute top-5 right-5 z-30 text-[#FAF6F0]/70 hover:text-[#FAF6F0] transition-colors p-2 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md cursor-pointer"
+            aria-label="Close ceremony"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          {/* 3D Perspective Stage */}
+          <div className="relative z-20 max-w-xl w-full flex flex-col items-center justify-center perspective-1200 text-center">
+
+            {/* 1. Orbiting 3D Memories Constellation (Active during 'orbit') */}
+            {sequenceStage === 'orbit' && (
+              <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-10">
+                {orbitingMemories.map((m) => (
+                  <div
+                    key={m.id}
+                    className={`absolute flex flex-col items-center justify-center ${m.anim}`}
+                  >
+                    <div className="polaroid-frame bg-white p-1 rounded-xs shadow-2xl scale-75 hover:scale-95 transition-transform duration-300 border border-[#D4AF37]/50">
+                      <ImageWithFallback
+                        src={m.img}
+                        alt={m.title}
+                        aspectRatio="square"
+                        objectFit="cover"
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xs"
+                      />
+                      <span className="text-[9px] font-handwritten text-[#6C2231] font-bold block text-center truncate max-w-[80px]">
+                        {m.title}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* 2. Floating 3D Signature Rakhi Centerpiece */}
             <div
-              className={`transform-style-3d transition-all duration-700 ease-out py-4 ${
-                rakhi3DStage === 'zoom'
-                  ? 'scale-130 translate-z-12 rotate-y-12 drop-shadow-[0_0_35px_rgba(212,175,55,0.85)]'
-                  : 'scale-100 rotate-y-0 drop-shadow-[0_0_15px_rgba(212,175,55,0.45)]'
+              className={`transform-style-3d transition-all duration-700 ease-out py-6 ${
+                sequenceStage === 'orbit'
+                  ? 'scale-120 translate-z-10 rotate-y-6 drop-shadow-[0_0_45px_rgba(212,175,55,0.9)]'
+                  : sequenceStage === 'converge'
+                  ? 'scale-135 translate-z-16 rotate-y-12 drop-shadow-[0_0_60px_rgba(212,175,55,1)] animate-pulse'
+                  : sequenceStage === 'reveal'
+                  ? 'scale-110 translate-z-4 rotate-y-0 drop-shadow-[0_0_30px_rgba(212,175,55,0.7)]'
+                  : 'scale-100 rotate-y-0'
               }`}
             >
               <div className="relative flex items-center justify-center">
-                {/* Thread Left */}
-                <div className="w-14 sm:w-20 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+                {/* 3D Silk Threads Left */}
+                <div className="w-16 sm:w-28 h-1.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]" />
 
-                {/* Center Sacred Rosette */}
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full p-2 bg-gradient-to-tr from-[#D4AF37] via-[#FBF4DE] to-[#9B5DE5] ring-4 ring-[#D4AF37]/60 shadow-[0_0_40px_rgba(212,175,55,0.6)] flex items-center justify-center animate-pulse-glow">
+                {/* 3D Sacred Central Rosette */}
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-2.5 bg-gradient-to-tr from-[#D4AF37] via-[#FFFDF9] to-[#9B5DE5] ring-4 ring-[#D4AF37]/80 shadow-[0_0_50px_rgba(212,175,55,0.8)] flex items-center justify-center animate-pulse-glow">
                   <div className="w-full h-full rounded-full bg-[#6C2231] border-2 border-[#D4AF37] flex flex-col items-center justify-center text-[#FAF6F0] shadow-inner">
-                    <Heart className="w-8 h-8 sm:w-9 sm:h-9 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
-                    <span className="text-[9px] font-bold tracking-widest uppercase text-[#FBF4DE] mt-0.5">
-                      RAKSHA BANDHAN
+                    <Heart className="w-9 h-9 sm:w-10 sm:h-10 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
+                    <span className="text-[10px] font-bold tracking-widest uppercase text-[#FBF4DE] mt-1">
+                      RAKHI
                     </span>
                   </div>
 
-                  {/* Decorative Outer Beads */}
-                  <div className="absolute -top-1.5 w-3 h-3 rounded-full bg-[#D4AF37] shadow-xs" />
-                  <div className="absolute -bottom-1.5 w-3 h-3 rounded-full bg-[#D4AF37] shadow-xs" />
-                  <div className="absolute -left-1.5 w-3 h-3 rounded-full bg-[#D4AF37] shadow-xs" />
-                  <div className="absolute -right-1.5 w-3 h-3 rounded-full bg-[#D4AF37] shadow-xs" />
+                  {/* Golden Embellishment Beads */}
+                  <div className="absolute -top-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
+                  <div className="absolute -bottom-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
+                  <div className="absolute -left-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
+                  <div className="absolute -right-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
                 </div>
 
-                {/* Thread Right */}
-                <div className="w-14 sm:w-20 h-1 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+                {/* 3D Silk Threads Right */}
+                <div className="w-16 sm:w-28 h-1.5 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]" />
               </div>
             </div>
 
-            {/* Emotional Message */}
-            <div className="space-y-2 pt-1">
-              <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                <span>Renewing Sacred Bond</span>
-                <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-              </div>
+            {/* 3. Dynamic Narrative & Emotional 3D Reveal */}
+            <div className="mt-4 max-w-lg mx-auto space-y-4 px-4">
+              {sequenceStage === 'emerge' && (
+                <div className="animate-fade-in space-y-2">
+                  <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
+                    ✦ Initiating Sacred Sibling Ceremony ✦
+                  </p>
+                  <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white">
+                    Connecting Across The Distance...
+                  </h3>
+                </div>
+              )}
 
-              <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-[#FFFDF9] leading-snug">
-                “Tying Our Sacred Thread... ❤️”
-              </h3>
+              {sequenceStage === 'orbit' && (
+                <div className="animate-fade-in space-y-2">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#9B5DE5]/30 border border-[#9B5DE5]/50 text-[#E9D5FF] text-xs font-semibold uppercase tracking-widest">
+                    <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                    <span>Every Memory We Shared In 3 Years</span>
+                  </div>
+                  <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white">
+                    “Every moment, every laugh, tied into one sacred bond.”
+                  </h3>
+                </div>
+              )}
 
-              <p className="font-handwritten text-xl sm:text-2xl text-[#E9D5FF] pt-1">
-                For My Dearest Akkaaa (Bangarammmm)
-              </p>
+              {sequenceStage === 'converge' && (
+                <div className="animate-fade-in space-y-2">
+                  <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
+                    ✦ Sealing Our Lifetime Promise ✦
+                  </p>
+                  <h3 className="font-serif-heading text-2xl sm:text-4xl font-bold text-[#FFFDF9]">
+                    Pure Trust & Unbreakable Love ❤️
+                  </h3>
+                </div>
+              )}
+
+              {sequenceStage === 'reveal' && (
+                <div className="animate-fade-in [animation-duration:700ms] space-y-4">
+                  <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-[#2A1528] via-[#1E0D1C] to-[#160814] border border-[#D4AF37]/60 shadow-2xl text-left space-y-3">
+                    <div className="flex items-center justify-between border-b border-[#D4AF37]/25 pb-2">
+                      <span className="text-[11px] uppercase tracking-widest text-[#D4AF37] font-bold">
+                        ✦ Sacred Sibling Bond Renewed ✦
+                      </span>
+                      <Sparkles className="w-4 h-4 text-[#D4AF37]" />
+                    </div>
+
+                    <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-[#FFFDF9] leading-snug">
+                      “Some moments are worth living again. ❤️”
+                    </h3>
+
+                    <p className="text-sm sm:text-base text-gray-200 font-sans leading-relaxed">
+                      No matter where life takes us, you will always be my sister, my guide, and my true family. The sacred thread tied on my wrist remains untangled forever.
+                    </p>
+
+                    <p className="font-handwritten text-2xl sm:text-3xl text-[#E9D5FF] text-right pt-2 font-bold">
+                      Forever My Bangarammmm ❤️ (Akkaaa)
+                    </p>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <button
+                      onClick={handleCloseModal}
+                      className="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 text-white font-sans text-xs font-semibold hover:bg-white/20 transition-all cursor-pointer"
+                    >
+                      Return to Scrapbook
+                    </button>
+                    <button
+                      onClick={handleContinueToLetter}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E2C055] text-[#241126] font-sans font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+                    >
+                      <span>Read Final Chapter Letter →</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
           </div>
+
         </div>
       )}
 

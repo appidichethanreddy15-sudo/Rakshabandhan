@@ -394,6 +394,59 @@
 }
 
 /* ==========================================================================
+   3D Orbiting Memory Polaroids for "Tie Rakhi Again" Experience
+   ========================================================================== */
+
+@keyframes memoryOrbit1 {
+  0% { transform: rotate(0deg) translateX(140px) rotate(0deg) scale(0.85); opacity: 0; }
+  10% { opacity: 0.95; }
+  85% { opacity: 0.95; }
+  100% { transform: rotate(360deg) translateX(140px) rotate(-360deg) scale(0.85); opacity: 0.9; }
+}
+
+@keyframes memoryOrbit2 {
+  0% { transform: rotate(60deg) translateX(165px) rotate(-60deg) scale(0.8); opacity: 0; }
+  10% { opacity: 0.95; }
+  85% { opacity: 0.95; }
+  100% { transform: rotate(420deg) translateX(165px) rotate(-420deg) scale(0.8); opacity: 0.9; }
+}
+
+@keyframes memoryOrbit3 {
+  0% { transform: rotate(120deg) translateX(150px) rotate(-120deg) scale(0.85); opacity: 0; }
+  10% { opacity: 0.95; }
+  85% { opacity: 0.95; }
+  100% { transform: rotate(480deg) translateX(150px) rotate(-480deg) scale(0.85); opacity: 0.9; }
+}
+
+@keyframes memoryOrbit4 {
+  0% { transform: rotate(180deg) translateX(170px) rotate(-180deg) scale(0.8); opacity: 0; }
+  10% { opacity: 0.95; }
+  85% { opacity: 0.95; }
+  100% { transform: rotate(540deg) translateX(170px) rotate(-540deg) scale(0.8); opacity: 0.9; }
+}
+
+@keyframes memoryOrbit5 {
+  0% { transform: rotate(240deg) translateX(145px) rotate(-240deg) scale(0.85); opacity: 0; }
+  10% { opacity: 0.95; }
+  85% { opacity: 0.95; }
+  100% { transform: rotate(600deg) translateX(145px) rotate(-600deg) scale(0.85); opacity: 0.9; }
+}
+
+@keyframes memoryOrbit6 {
+  0% { transform: rotate(300deg) translateX(165px) rotate(-300deg) scale(0.8); opacity: 0; }
+  10% { opacity: 0.95; }
+  85% { opacity: 0.95; }
+  100% { transform: rotate(660deg) translateX(165px) rotate(-660deg) scale(0.8); opacity: 0.9; }
+}
+
+.animate-memory-orbit-1 { animation: memoryOrbit1 20s linear infinite; }
+.animate-memory-orbit-2 { animation: memoryOrbit2 22s linear infinite; }
+.animate-memory-orbit-3 { animation: memoryOrbit3 18s linear infinite; }
+.animate-memory-orbit-4 { animation: memoryOrbit4 21s linear infinite; }
+.animate-memory-orbit-5 { animation: memoryOrbit5 19s linear infinite; }
+.animate-memory-orbit-6 { animation: memoryOrbit6 23s linear infinite; }
+
+/* ==========================================================================
    Cinematic 3D Memory-to-Memory Page Transitions
    ========================================================================== */
 
