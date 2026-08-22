@@ -62,7 +62,7 @@ export const sequentialMemories: StoryMemory[] = [
     id: 5,
     sectionNumber: 5,
     title: "The Art You Drew On My Hand",
-    image: "/images/hand_art.jpg",
+    image: "/images/handart.jpeg",
     date: "A Precious Little Memory",
     story: "I still smile whenever I look at this picture of the art you drew on my palm. You sat with so much care, concentration, and sweet sibling affection, carefully placing every dot and circle on my hand. It didn't matter what design it was—what mattered was the warmth of your hands, the laughter we shared while you were drawing, and the little piece of your care you left with me. It’s one of those innocent, sweet moments that I will always treasure in my heart.",
     buttonText: "Continue →"
