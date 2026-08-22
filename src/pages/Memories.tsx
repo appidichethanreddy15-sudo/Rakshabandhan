@@ -5,7 +5,12 @@ import { sequentialMemories, type StoryMemory } from '../data/memories';
 import { WashiTape } from '../components/WashiTape';
 import { ImageWithFallback } from '../components/ImageWithFallback';
 import { NicknamesSection } from '../components/NicknamesSection';
+import { MemoryTunnelTransition } from '../components/MemoryTunnelTransition';
 import { ArrowRight, Sparkles, Heart } from 'lucide-react';
+
+// Easily configurable memory steps that trigger the 3D Memory Tunnel transition
+// (e.g. Step 3 -> Step 4, and Step 5 -> Step 6)
+const TUNNEL_STEP_TRANSITIONS = [3, 5];
 
 export const Memories: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,6 +28,10 @@ export const Memories: React.FC = () => {
   const [isPhotoLifting, setIsPhotoLifting] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
 
+  // 3D Memory Tunnel State
+  const [isTunnelActive, setIsTunnelActive] = useState(false);
+  const [tunnelTargetStep, setTunnelTargetStep] = useState<number | null>(null);
+
   const [displayedMemory, setDisplayedMemory] = useState<StoryMemory>(
     sequentialMemories[currentStep - 1] || sequentialMemories[0]
   );
@@ -36,6 +45,7 @@ export const Memories: React.FC = () => {
     setTurnStage('turningIn');
     setIsNavigating(false);
     setIsPhotoLifting(false);
+    setIsTunnelActive(false);
 
     const timer = setTimeout(() => {
       setTurnStage('idle');
@@ -46,11 +56,22 @@ export const Memories: React.FC = () => {
     return () => clearTimeout(timer);
   }, [currentStep]);
 
-  // Handle Forward Turn with 3D Photo Lift Sequence
+  // Handle Forward Navigation (With 3D Memory Tunnel on configured steps)
   const handleNext = () => {
     if (isNavigating || turnStage !== 'idle') return;
 
     if (currentStep < totalSteps) {
+      const nextStepNum = currentStep + 1;
+
+      // Check if current step transition uses the 3D Memory Tunnel
+      if (TUNNEL_STEP_TRANSITIONS.includes(currentStep)) {
+        setIsNavigating(true);
+        setTunnelTargetStep(nextStepNum);
+        setIsTunnelActive(true);
+        return;
+      }
+
+      // Normal 3D Scrapbook Page Turn
       setIsNavigating(true);
       setIsPhotoLifting(true);
 
@@ -61,13 +82,22 @@ export const Memories: React.FC = () => {
 
         // Phase 2 (160ms): Page swings away & loads next memory
         setTimeout(() => {
-          setSearchParams({ step: (currentStep + 1).toString() });
+          setSearchParams({ step: nextStepNum.toString() });
         }, 160);
       }, 140);
     } else {
       // Final step continues to Special Moments chapter
       navigate('/moments');
     }
+  };
+
+  // Tunnel complete callback
+  const handleTunnelComplete = () => {
+    if (tunnelTargetStep) {
+      setSearchParams({ step: tunnelTargetStep.toString() });
+    }
+    setIsTunnelActive(false);
+    setIsNavigating(false);
   };
 
   // Jump to specific step from dots
@@ -92,8 +122,23 @@ export const Memories: React.FC = () => {
     return '';
   };
 
+  const nextMemory = sequentialMemories[currentStep] || sequentialMemories[0];
+  const allMemoryImages = sequentialMemories.map((m) => m.image);
+
   return (
     <PageTransition>
+      {/* 3D Memory Tunnel Overlay during selected transitions */}
+      {isTunnelActive && (
+        <MemoryTunnelTransition
+          fromImage={displayedMemory.image}
+          fromTitle={displayedMemory.title}
+          toImage={nextMemory.image}
+          toTitle={nextMemory.title}
+          corridorPhotos={allMemoryImages}
+          onComplete={handleTunnelComplete}
+        />
+      )}
+
       <div className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto flex flex-col items-center min-h-[75vh] justify-between perspective-1400 overflow-hidden">
         
         {/* Subtle Scrapbook Progress Indicator */}
