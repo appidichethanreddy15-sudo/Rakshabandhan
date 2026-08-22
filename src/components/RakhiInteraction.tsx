@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { Heart, Sparkles, ShieldCheck, X, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -19,9 +19,16 @@ export const RakhiInteraction: React.FC = () => {
   const [tied, setTied] = useState(false);
   const [isCinematicActive, setIsCinematicActive] = useState(false);
   const [sequenceStage, setSequenceStage] = useState<'emerge' | 'orbit' | 'converge' | 'reveal'>('emerge');
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleTieRakhi = () => {
     if (isCinematicActive) return;
+
+    // Smoothly scroll the screen to where the celebration is displayed
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     setIsCinematicActive(true);
     setSequenceStage('emerge');
 
@@ -64,6 +71,9 @@ export const RakhiInteraction: React.FC = () => {
 
   const handleCloseModal = () => {
     setIsCinematicActive(false);
+    setTimeout(() => {
+      containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
   };
 
   const handleContinueToLetter = () => {
@@ -72,7 +82,10 @@ export const RakhiInteraction: React.FC = () => {
   };
 
   return (
-    <div className="relative paper-parchment rounded-3xl p-6 sm:p-10 border border-[#D4AF37]/40 shadow-lg text-center overflow-hidden">
+    <div
+      ref={containerRef}
+      className="relative paper-parchment rounded-3xl p-6 sm:p-10 border border-[#D4AF37]/40 shadow-lg text-center overflow-hidden"
+    >
       {/* Decorative Gold Corner Flairs */}
       <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-[#D4AF37]/50 rounded-tl-lg pointer-events-none" />
       <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-[#D4AF37]/50 rounded-tr-lg pointer-events-none" />
@@ -98,25 +111,17 @@ export const RakhiInteraction: React.FC = () => {
             }`}
           >
             {/* Inner Sacred Rosette */}
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#6C2231] flex flex-col items-center justify-center text-[#FAF6F0] shadow-inner">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#6C2231] to-[#842D3D] flex items-center justify-center text-[#FBF4DE] shadow-md border-2 border-[#D4AF37]">
               <Heart
-                className={`w-6 h-6 transition-transform duration-500 ${
-                  tied ? 'fill-[#D4AF37] text-[#D4AF37] scale-110 animate-pulse' : 'text-[#FAF6F0]'
+                className={`w-7 h-7 sm:w-8 sm:h-8 transition-all duration-500 ${
+                  tied ? 'fill-[#D4AF37] text-[#D4AF37] scale-110' : 'text-[#FAF6F0]'
                 }`}
               />
-              <span className="text-[8px] font-bold tracking-widest uppercase text-[#FAF6F0]/90 -mt-0.5">
-                {tied ? 'PROTECTED' : 'RAKHI'}
-              </span>
             </div>
 
-            {/* Glowing Golden Beads Around */}
+            {/* Glowing Aura Ring when tied */}
             {tied && (
-              <>
-                <div className="absolute -top-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
-                <div className="absolute -bottom-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
-                <div className="absolute -left-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
-                <div className="absolute -right-1 w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-xs" />
-              </>
+              <div className="absolute inset-0 rounded-full border-2 border-[#D4AF37] animate-ping opacity-30 pointer-events-none" />
             )}
           </div>
 
@@ -219,80 +224,80 @@ export const RakhiInteraction: React.FC = () => {
             <X className="w-5 h-5" />
           </button>
 
-          {/* 3D Perspective Stage */}
-          <div className="relative z-20 max-w-xl w-full flex flex-col items-center justify-center perspective-1200 text-center">
-
-            {/* 1. Orbiting 3D Memories Constellation (Active during 'orbit') */}
-            {sequenceStage === 'orbit' && (
-              <div className="absolute inset-0 pointer-events-none flex items-center justify-center z-10">
-                {orbitingMemories.map((m) => (
-                  <div
-                    key={m.id}
-                    className={`absolute flex flex-col items-center justify-center ${m.anim}`}
-                  >
-                    <div className="polaroid-frame bg-white p-1 rounded-xs shadow-2xl scale-75 hover:scale-95 transition-transform duration-300 border border-[#D4AF37]/50">
+          {/* 3D Sacred Space Container */}
+          <div className="relative z-20 w-full max-w-2xl flex flex-col items-center justify-center perspective-1200">
+            
+            {/* The 3D Golden Sacred Stage with Orbiting Memories */}
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center transform-style-3d my-4">
+              
+              {/* 1. Orbiting Memories Constellation (6 Orbiting Polaroids) */}
+              {(sequenceStage === 'orbit' || sequenceStage === 'converge') && (
+                <div
+                  className={`absolute inset-0 flex items-center justify-center pointer-events-none transform-style-3d transition-all duration-1000 ${
+                    sequenceStage === 'converge' ? 'scale-0 opacity-0 blur-xs' : 'scale-100 opacity-100'
+                  }`}
+                >
+                  {orbitingMemories.map((mem) => (
+                    <div
+                      key={mem.id}
+                      className={`absolute w-20 sm:w-24 p-1.5 rounded-sm bg-white/95 shadow-2xl border border-[#D4AF37]/60 transform-style-3d ${mem.anim}`}
+                    >
                       <ImageWithFallback
-                        src={m.img}
-                        alt={m.title}
-                        aspectRatio="square"
-                        objectFit="cover"
-                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xs"
+                        src={mem.img}
+                        alt={mem.title}
+                        aspectRatio="auto"
+                        className="rounded-xs h-16 sm:h-20 w-full object-cover"
                       />
-                      <span className="text-[9px] font-handwritten text-[#6C2231] font-bold block text-center truncate max-w-[80px]">
-                        {m.title}
+                      <span className="font-handwritten text-[10px] text-[#6C2231] block text-center truncate mt-0.5 font-bold">
+                        {mem.title}
                       </span>
                     </div>
+                  ))}
+                </div>
+              )}
+
+              {/* 2. Floating 3D Rakhi Keepsake */}
+              <div
+                className={`relative z-20 w-36 h-36 sm:w-44 sm:h-44 rounded-full flex items-center justify-center transform-style-3d transition-all duration-700 ${
+                  sequenceStage === 'emerge'
+                    ? 'scale-75 opacity-70 rotate-12'
+                    : sequenceStage === 'orbit'
+                    ? 'scale-100 opacity-100 animate-float'
+                    : sequenceStage === 'converge'
+                    ? 'scale-125 animate-pulse-glow rotate-0'
+                    : 'scale-110 shadow-[0_0_50px_rgba(212,175,55,0.9)]'
+                }`}
+              >
+                {/* 3D Golden Rosette Halo */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37] via-[#FFFDF9] to-[#C87D88] p-1.5 shadow-2xl ring-4 ring-[#D4AF37]/60">
+                  <div className="w-full h-full rounded-full bg-gradient-to-b from-[#6C2231] via-[#842D3D] to-[#4A1520] flex items-center justify-center border-2 border-[#D4AF37]">
+                    
+                    {/* Center 3D Heart / Sacred Symbol */}
+                    <div className="relative flex items-center justify-center">
+                      <Heart className="w-16 h-16 sm:w-20 sm:h-20 fill-[#D4AF37] text-[#FAF6F0] drop-shadow-[0_4px_12px_rgba(212,175,55,0.8)] animate-pulse" />
+                      <Sparkles className="absolute -top-1 -right-1 w-6 h-6 text-[#FFFDF9] animate-spin [animation-duration:6s]" />
+                    </div>
+
                   </div>
-                ))}
-              </div>
-            )}
-
-            {/* 2. Floating 3D Signature Rakhi Centerpiece */}
-            <div
-              className={`transform-style-3d transition-all duration-700 ease-out py-6 ${
-                sequenceStage === 'orbit'
-                  ? 'scale-120 translate-z-10 rotate-y-6 drop-shadow-[0_0_45px_rgba(212,175,55,0.9)]'
-                  : sequenceStage === 'converge'
-                  ? 'scale-135 translate-z-16 rotate-y-12 drop-shadow-[0_0_60px_rgba(212,175,55,1)] animate-pulse'
-                  : sequenceStage === 'reveal'
-                  ? 'scale-110 translate-z-4 rotate-y-0 drop-shadow-[0_0_30px_rgba(212,175,55,0.7)]'
-                  : 'scale-100 rotate-y-0'
-              }`}
-            >
-              <div className="relative flex items-center justify-center">
-                {/* 3D Silk Threads Left */}
-                <div className="w-16 sm:w-28 h-1.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]" />
-
-                {/* 3D Sacred Central Rosette */}
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-2.5 bg-gradient-to-tr from-[#D4AF37] via-[#FFFDF9] to-[#9B5DE5] ring-4 ring-[#D4AF37]/80 shadow-[0_0_50px_rgba(212,175,55,0.8)] flex items-center justify-center animate-pulse-glow">
-                  <div className="w-full h-full rounded-full bg-[#6C2231] border-2 border-[#D4AF37] flex flex-col items-center justify-center text-[#FAF6F0] shadow-inner">
-                    <Heart className="w-9 h-9 sm:w-10 sm:h-10 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
-                    <span className="text-[10px] font-bold tracking-widest uppercase text-[#FBF4DE] mt-1">
-                      RAKHI
-                    </span>
-                  </div>
-
-                  {/* Golden Embellishment Beads */}
-                  <div className="absolute -top-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
-                  <div className="absolute -bottom-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
-                  <div className="absolute -left-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
-                  <div className="absolute -right-2 w-3.5 h-3.5 rounded-full bg-[#D4AF37] shadow-sm" />
                 </div>
 
-                {/* 3D Silk Threads Right */}
-                <div className="w-16 sm:w-28 h-1.5 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#9B5DE5] rounded-full shadow-[0_0_12px_rgba(212,175,55,0.9)]" />
+                {/* Left & Right Flowing Golden Threads */}
+                <div className="absolute left-[-60px] sm:left-[-90px] w-16 sm:w-24 h-1 bg-gradient-to-r from-transparent via-[#D4AF37] to-[#C87D88] rounded-full shadow-[0_0_10px_#D4AF37]" />
+                <div className="absolute right-[-60px] sm:right-[-90px] w-16 sm:w-24 h-1 bg-gradient-to-l from-transparent via-[#D4AF37] to-[#C87D88] rounded-full shadow-[0_0_10px_#D4AF37]" />
               </div>
+
             </div>
 
-            {/* 3. Dynamic Narrative & Emotional 3D Reveal */}
-            <div className="mt-4 max-w-lg mx-auto space-y-4 px-4">
+            {/* 3. Cinematic Text & Story Arc */}
+            <div className="text-center max-w-lg mx-auto mt-2 px-4 min-h-[140px] flex flex-col items-center justify-center">
+              
               {sequenceStage === 'emerge' && (
-                <div className="animate-fade-in space-y-2">
-                  <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-bold">
-                    ✦ Initiating Sacred Sibling Ceremony ✦
+                <div className="animate-fade-in space-y-1">
+                  <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">
+                    ✦ Renewing Sacred Thread ✦
                   </p>
                   <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white">
-                    Connecting Across The Distance...
+                    Connecting Our Bond Across The Distance...
                   </h3>
                 </div>
               )}
