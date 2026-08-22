@@ -28,7 +28,7 @@ export const sequentialMemories: StoryMemory[] = [
     id: 1,
     sectionNumber: 1,
     title: "Our Journey",
-    image: "/images/memory1.jpg",
+    image: "/images/image.png",
     story: "We met approximately three years ago as two strangers who didn't even know what the other person's life looked like. We weren't connected by blood, but somewhere along the way, through endless daily conversations, shared emotions, petty arguments, and genuine understanding, you became my sister. We shared our routines, our fears, our happiness, and our hardest days. Through every misunderstanding, we always came back to each other and stayed together. Today, you are truly family to me, and one of the most irreplaceable people in my entire life.",
     buttonText: "Continue Our Story →"
   },
