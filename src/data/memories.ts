@@ -79,15 +79,6 @@ export const sequentialMemories: StoryMemory[] = [
   {
     id: 7,
     sectionNumber: 7,
-    title: "The Night I Never Forgot",
-    image: "/images/night-memory.jpg",
-    date: "A Night of Comfort & Trust",
-    story: "Spending that day at your home is a memory I keep very close to my heart—we talked, laughed, shared little things, and simply enjoyed being together. Later that night, while we were sleeping, we both held each other’s hands, a moment we both knew and shared. ❤️\n\nThe next morning, you were still asleep when you called me to sit beside you, and you held my hand tightly again while you were sleeping.\n\nI felt an indescribable happiness and comfort in that little moment, even though I couldn't put my feelings into words.\n\nLater that day, I became so emotional that I couldn't control what I was feeling.\n\nIt was such a simple moment, but I kept thinking about it for almost a week—it became one of those memories I never want to forget. ❤️",
-    buttonText: "Continue →"
-  },
-  {
-    id: 8,
-    sectionNumber: 8,
     title: "You Have So Many Names... ❤️",
     image: "/images/maa_wrist.png",
     date: "All The Names I Call You",
