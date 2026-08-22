@@ -45,7 +45,7 @@ export const sequentialMemories: StoryMemory[] = [
     id: 3,
     sectionNumber: 3,
     title: "A Name I Could Never Forget",
-    image: "/images/memory8.jpg",
+    image: "/images/chalk.jpeg",
     story: "I wrote your name on a simple piece of chalk, but for me, it was never just a piece of art. ❤️\n\nEvery stroke carried a little piece of my love, because your name holds countless memories and emotions in my heart.\n\nIt may look small and ordinary to others, but I made it with feelings I could never fully put into words.\n\nSometimes, the simplest things we create with love become the memories we hold closest to our hearts. 🥹❤️",
     buttonText: "Continue →"
   },
