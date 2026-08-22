@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PageTransition } from '../components/PageTransition';
 import { letterData } from '../data/letterData';
 import { WashiTape } from '../components/WashiTape';
-import { Sparkles, Heart, Gift, X, Award, Shield } from 'lucide-react';
+import { Sparkles, Heart, Gift, X, Shield } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { ImageWithFallback } from '../components/ImageWithFallback';
 
@@ -184,41 +184,46 @@ export const Letter: React.FC = () => {
             {/* 3D Perspective Stage */}
             <div className="relative z-20 max-w-xl w-full flex flex-col items-center justify-center perspective-1400 text-center">
 
-              {/* 1. Floating 3D Royal Keepsake Chest / Wax Sealed Gift Box */}
+              {/* 1. Floating 3D Royal Keepsake Heart */}
               {(experienceStage === 'locked' || experienceStage === 'unfolding') && (
                 <div className="animate-gift-box-emerge transform-style-3d flex flex-col items-center py-6">
-                  <div className="relative w-64 sm:w-72 p-6 rounded-3xl bg-gradient-to-br from-[#4A1520] via-[#2D0B14] to-[#1F070E] border-2 border-[#D4AF37] shadow-[0_20px_50px_rgba(212,175,55,0.4)] flex flex-col items-center justify-center space-y-4">
+                  <div className="relative flex flex-col items-center justify-center space-y-5">
                     
-                    {/* Golden Corner Bracket Accents */}
-                    <div className="absolute top-2.5 left-2.5 w-5 h-5 border-t-2 border-l-2 border-[#D4AF37] rounded-tl-md" />
-                    <div className="absolute top-2.5 right-2.5 w-5 h-5 border-t-2 border-r-2 border-[#D4AF37] rounded-tr-md" />
-                    <div className="absolute bottom-2.5 left-2.5 w-5 h-5 border-b-2 border-l-2 border-[#D4AF37] rounded-bl-md" />
-                    <div className="absolute bottom-2.5 right-2.5 w-5 h-5 border-b-2 border-r-2 border-[#D4AF37] rounded-br-md" />
+                    {/* 3D Radiant Heart Jewel Container */}
+                    <div className="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center transform-style-3d">
+                      
+                      {/* Outer 3D Heart Aura Ring */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#D4AF37]/50 via-[#842D3D]/30 to-[#9B5DE5]/30 blur-xl animate-pulse-glow" />
 
-                    {/* Glowing Golden Wax Seal */}
-                    <div
-                      className={`w-20 h-20 rounded-full bg-gradient-to-tr from-[#D4AF37] via-[#FFF5D0] to-[#B38F24] p-1.5 shadow-[0_0_30px_rgba(212,175,55,0.8)] flex items-center justify-center ${
-                        experienceStage === 'unfolding' ? 'animate-wax-seal-burst' : 'animate-pulse-glow'
-                      }`}
-                    >
-                      <div className="w-full h-full rounded-full bg-[#6C2231] border border-[#D4AF37] flex flex-col items-center justify-center text-[#FBF4DE]">
-                        <Award className="w-7 h-7 text-[#D4AF37]" />
-                        <span className="text-[7px] font-bold uppercase tracking-widest text-[#FBF4DE] mt-0.5">
-                          AKKAAA
-                        </span>
+                      {/* 3D Royal Heart Emblem */}
+                      <div
+                        className={`relative z-10 w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-gradient-to-br from-[#6C2231] via-[#842D3D] to-[#4A1520] border-3 border-[#D4AF37] shadow-[0_15px_40px_rgba(212,175,55,0.6)] flex items-center justify-center transform-style-3d ${
+                          experienceStage === 'unfolding' ? 'animate-wax-seal-burst scale-110' : 'animate-float'
+                        }`}
+                      >
+                        {/* Inner Golden Ring */}
+                        <div className="w-28 h-28 sm:w-34 sm:h-34 rounded-full border border-[#D4AF37]/50 flex items-center justify-center bg-radial from-[#9B5DE5]/20 via-[#4A1520] to-[#25070E] shadow-inner">
+                          <Heart className="w-16 h-16 sm:w-20 sm:h-20 fill-[#D4AF37] text-[#FAF6F0] drop-shadow-[0_8px_20px_rgba(212,175,55,0.9)] animate-pulse" />
+                        </div>
+
+                        {/* Floating Sparkles on Heart */}
+                        <Sparkles className="absolute top-2 right-4 w-5 h-5 text-[#FAF6F0] animate-spin [animation-duration:5s]" />
+                        <Sparkles className="absolute bottom-3 left-4 w-4 h-4 text-[#D4AF37] animate-bounce [animation-duration:2.5s]" />
                       </div>
                     </div>
 
-                    <div className="space-y-1 text-center">
-                      <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-[#D4AF37] flex items-center justify-center gap-1">
-                        <Sparkles className="w-3 h-3 text-[#D4AF37]" />
-                        <span>Sacred Brother's Gift</span>
-                        <Sparkles className="w-3 h-3 text-[#D4AF37]" />
+                    {/* Title & Status */}
+                    <div className="space-y-1.5 text-center">
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-widest text-[#D4AF37] flex items-center justify-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                        <span>A Special Brother's Keepsake</span>
+                        <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
                       </span>
-                      <h3 className="font-serif-heading text-xl sm:text-2xl font-bold text-white">
-                        {experienceStage === 'locked' ? "Unlocking Your Keepsake..." : "Opening Sealed Memories... ✨"}
+                      <h3 className="font-serif-heading text-2xl sm:text-3xl font-bold text-white tracking-wide">
+                        {experienceStage === 'locked' ? "Unlocking Your Heart Keepsake... ❤️" : "Opening Sealed Memories... ✨"}
                       </h3>
                     </div>
+
                   </div>
                 </div>
               )}
