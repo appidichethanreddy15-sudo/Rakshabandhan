@@ -44,7 +44,7 @@ export const Moments: React.FC = () => {
                 <div className="lg:col-span-5">
                   <div className="polaroid-frame rounded-sm bg-[#FAF6F0] p-2 text-[#2D2426] shadow-lg -rotate-1 hover:rotate-0 transition-transform overflow-hidden">
                     <ImageWithFallback
-                      src="/images/night-memory.jpg"
+                      src="/images/hands.jpeg"
                       alt="The memorable night"
                       aspectRatio="auto"
                       objectFit="contain"

@@ -18,7 +18,7 @@ export const specialMoments: SpecialMoment[] = [
     preview: "Spending that day at your home is a memory I keep very close to my heart...",
     fullStory: "Spending that day at your home is a memory I keep very close to my heart—we talked, laughed, shared little things, and simply enjoyed being together. Later that night, while we were sleeping, we both held each other’s hands, a moment we both knew and shared. ❤️ The next morning, you were still asleep when you called me to sit beside you, and you held my hand tightly again while you were sleeping. I felt an indescribable happiness and comfort in that little moment, even though I couldn't put my feelings into words. Later that day, I became so emotional that I couldn't control what I was feeling. It was such a simple moment, but I kept thinking about it for almost a week—it became one of those memories I never want to forget. ❤️",
     isNightMemory: true,
-    image: "/images/night-memory.jpg"
+    image: "/images/hands.jpeg"
   },
   {
     id: "never-told",
