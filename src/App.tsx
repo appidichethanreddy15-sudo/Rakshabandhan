@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavig
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { PreviousPageButton } from './components/PreviousPageButton';
+import { ScrollToTop } from './components/ScrollToTop';
 import { Welcome } from './pages/Welcome';
 import { Wishes } from './pages/Wishes';
 import { Home } from './pages/Home';
@@ -87,6 +88,9 @@ function AppContent() {
     <div
       className={`flex flex-col min-h-screen ${currentTheme.bg} text-[#2D2426] transition-colors duration-700 relative overflow-hidden`}
     >
+      {/* Universal Scroll To Top on Every Route Change */}
+      <ScrollToTop />
+
       {/* Dynamic Ambient Background Light Auras */}
       <div
         className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none -z-10 ${currentTheme.aura1} transition-all duration-700`}

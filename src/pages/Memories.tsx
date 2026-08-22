@@ -51,7 +51,14 @@ export const Memories: React.FC = () => {
       setTurnStage('idle');
     }, 650);
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Instant top reset when switching between steps
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (document.documentElement) {
+      document.documentElement.scrollTop = 0;
+    }
+    if (document.body) {
+      document.body.scrollTop = 0;
+    }
 
     return () => clearTimeout(timer);
   }, [currentStep]);

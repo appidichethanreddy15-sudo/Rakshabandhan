@@ -54,8 +54,14 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
     prevPathRef.current = currentPath;
     setAnimKey(`${currentPath}-${Date.now()}`);
 
-    // Smooth scroll to top when turning pages
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Instantaneous scroll to top to prevent landing partway down the new chapter
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    if (document.documentElement) {
+      document.documentElement.scrollTop = 0;
+    }
+    if (document.body) {
+      document.body.scrollTop = 0;
+    }
   }, [location.pathname]);
 
   const getAnimationClass = () => {
