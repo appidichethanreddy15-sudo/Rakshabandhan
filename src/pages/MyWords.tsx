@@ -48,7 +48,7 @@ export const MyWords: React.FC = () => {
           </div>
           <div className="polaroid-frame rounded-sm bg-white shadow-xl rotate-1 hover:rotate-0 transition-transform duration-500 overflow-hidden">
             <ImageWithFallback
-              src="/images/page2_sister.jpg"
+              src="/images/small.png"
               alt="Quiet moments together"
               aspectRatio="auto"
               objectFit="contain"
