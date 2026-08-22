@@ -19,7 +19,10 @@ export const Memories: React.FC = () => {
 
   const prevStepRef = useRef(currentStep);
   const [turnDirection, setTurnDirection] = useState<'forward' | 'backward'>('forward');
-  const [isTurnAnimActive, setIsTurnAnimActive] = useState(false);
+  const [turnStage, setTurnStage] = useState<'idle' | 'lifting' | 'turningOut' | 'turningIn'>('idle');
+  const [isPhotoLifting, setIsPhotoLifting] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
+
   const [displayedMemory, setDisplayedMemory] = useState<StoryMemory>(
     sequentialMemories[currentStep - 1] || sequentialMemories[0]
   );
@@ -29,30 +32,69 @@ export const Memories: React.FC = () => {
     setTurnDirection(isForward ? 'forward' : 'backward');
     prevStepRef.current = currentStep;
 
-    setIsTurnAnimActive(true);
     setDisplayedMemory(sequentialMemories[currentStep - 1] || sequentialMemories[0]);
+    setTurnStage('turningIn');
+    setIsNavigating(false);
+    setIsPhotoLifting(false);
 
     const timer = setTimeout(() => {
-      setIsTurnAnimActive(false);
-    }, 600);
+      setTurnStage('idle');
+    }, 650);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return () => clearTimeout(timer);
   }, [currentStep]);
 
+  // Handle Forward Turn with 3D Photo Lift Sequence
   const handleNext = () => {
+    if (isNavigating || turnStage !== 'idle') return;
+
     if (currentStep < totalSteps) {
-      setSearchParams({ step: (currentStep + 1).toString() });
+      setIsNavigating(true);
+      setIsPhotoLifting(true);
+
+      // Phase 1 (140ms): Photo lifts up in 3D
+      setTimeout(() => {
+        setTurnStage('turningOut');
+        setTurnDirection('forward');
+
+        // Phase 2 (160ms): Page swings away & loads next memory
+        setTimeout(() => {
+          setSearchParams({ step: (currentStep + 1).toString() });
+        }, 160);
+      }, 140);
     } else {
       // Final step continues to Special Moments chapter
       navigate('/moments');
     }
   };
 
+  // Jump to specific step from dots
+  const handleDotJump = (stepNum: number) => {
+    if (isNavigating || stepNum === currentStep) return;
+    setIsNavigating(true);
+    setTurnDirection(stepNum > currentStep ? 'forward' : 'backward');
+    setTurnStage('turningOut');
+    setTimeout(() => {
+      setSearchParams({ step: stepNum.toString() });
+    }, 160);
+  };
+
+  // Determine current 3D page turn CSS class
+  const getPageTurnClass = () => {
+    if (turnStage === 'turningOut') {
+      return turnDirection === 'forward' ? 'memory-turn-forward-out' : 'memory-turn-backward-out';
+    }
+    if (turnStage === 'turningIn') {
+      return turnDirection === 'forward' ? 'memory-turn-forward-in' : 'memory-turn-backward-in';
+    }
+    return '';
+  };
+
   return (
     <PageTransition>
-      <div className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto flex flex-col items-center min-h-[75vh] justify-between perspective-1200 overflow-hidden">
+      <div className="py-8 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto flex flex-col items-center min-h-[75vh] justify-between perspective-1400 overflow-hidden">
         
         {/* Subtle Scrapbook Progress Indicator */}
         <div className="w-full flex items-center justify-between mb-6 pb-3 border-b border-[#C87D88]/20">
@@ -66,7 +108,8 @@ export const Memories: React.FC = () => {
             {sequentialMemories.map((m) => (
               <button
                 key={m.id}
-                onClick={() => setSearchParams({ step: m.sectionNumber.toString() })}
+                onClick={() => handleDotJump(m.sectionNumber)}
+                disabled={isNavigating}
                 aria-label={`Jump to memory ${m.sectionNumber}`}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   m.sectionNumber === displayedMemory.sectionNumber
@@ -83,14 +126,11 @@ export const Memories: React.FC = () => {
         {/* 3D Memory Book Page Container */}
         <div
           key={displayedMemory.id}
-          className={`w-full flex flex-col items-center text-center transform-style-3d relative ${
-            isTurnAnimActive
-              ? turnDirection === 'forward'
-                ? 'memory-turn-forward-in'
-                : 'memory-turn-backward-in'
-              : ''
-          }`}
+          className={`w-full flex flex-col items-center text-center transform-style-3d relative ${getPageTurnClass()}`}
         >
+          {/* Subtle Page Edge Lighting */}
+          <div className={turnDirection === 'forward' ? 'paper-edge-left' : 'paper-edge-right'} />
+
           {displayedMemory.isNicknames ? (
             /* Specialized Interactive 3D Nicknames Section */
             <NicknamesSection
@@ -101,7 +141,11 @@ export const Memories: React.FC = () => {
             /* Standard Storytelling Memory Card */
             <>
               {/* 1. Large Photograph in Polaroid Scrapbook Frame */}
-              <div className="relative inline-block max-w-sm sm:max-w-md mx-auto my-2">
+              <div
+                className={`relative inline-block max-w-sm sm:max-w-md mx-auto my-2 transition-transform duration-200 transform-style-3d ${
+                  isPhotoLifting ? 'animate-photo-lift' : ''
+                }`}
+              >
                 {/* Top Washi Tape */}
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20">
                   <WashiTape
@@ -152,11 +196,12 @@ export const Memories: React.FC = () => {
                 </div>
               )}
 
-              {/* 5. Button to Continue to Next Memory */}
+              {/* 5. Button to Continue to Next Memory with Instant Click Feedback */}
               <div className="mt-8 mb-4 w-full sm:w-auto">
                 <button
                   onClick={handleNext}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group border border-[#D4AF37]/30"
+                  disabled={isNavigating}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer group border border-[#D4AF37]/30 disabled:opacity-75 disabled:pointer-events-none"
                 >
                   <span>{displayedMemory.buttonText}</span>
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
