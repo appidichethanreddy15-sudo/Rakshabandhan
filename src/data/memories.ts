@@ -35,7 +35,7 @@ export const sequentialMemories: StoryMemory[] = [
   {
     id: 2,
     sectionNumber: 2,
-    title: "The Celebration I Never Made for Anyone... I Made for You (Myy Gaajubomma 🥺💕)",
+    title: "The Celebration I Never Made for Anyone... I Made for You (Naa Gaajubomma 🥺💕)",
     image: "/images/birthday1.jpg",
     date: "Birthday Celebration",
     story: "I had never planned or put together this kind of birthday celebration for anyone in my life before. But when it came to you, I wanted to do it with all my heart. Seeing the genuine happiness on your face, capturing your unfiltered smile, and watching you enjoy every single second of that day meant more to me than words can describe. That photograph isn't just a picture of a birthday; it preserves the warmth and pure joy of a sister I will always cherish.",
