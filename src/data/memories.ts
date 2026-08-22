@@ -73,7 +73,7 @@ export const sequentialMemories: StoryMemory[] = [
     id: 6,
     sectionNumber: 6,
     title: "A Video Call That Made My Whole Day",
-    image: "/images/memory11.jpg",
+    image: "/images/vc.png",
     date: "Special Video Call",
     story: "Whenever I see your name pop up for a video call, no matter how exhausted, stressed, or drained I was feeling, everything instantly gets lighter. Watching you talk animatedly with your hands, laugh at silly things, make funny faces, and just share your unfiltered day with me brings a genuine smile to my face that stays for hours. Seeing you happy on that screen reminded me that some of the best moments with you don't need a grand plan—just seeing your genuine smile across the screen is enough to brighten my entire world.",
     buttonText: "Continue"
