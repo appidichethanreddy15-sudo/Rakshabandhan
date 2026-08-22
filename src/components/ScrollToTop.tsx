@@ -12,7 +12,7 @@ export const ScrollToTop: React.FC = () => {
   }, []);
 
   useLayoutEffect(() => {
-    // Instantaneous reset to the very top before paint
+    // Instantaneous single authoritative reset to the top before paint
     window.scrollTo({
       top: 0,
       left: 0,
@@ -25,19 +25,6 @@ export const ScrollToTop: React.FC = () => {
     if (document.body) {
       document.body.scrollTop = 0;
     }
-
-    // Microtask backup frame to guarantee mobile viewport top alignment
-    const frameId = requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-      if (document.documentElement) {
-        document.documentElement.scrollTop = 0;
-      }
-      if (document.body) {
-        document.body.scrollTop = 0;
-      }
-    });
-
-    return () => cancelAnimationFrame(frameId);
   }, [pathname, search]);
 
   return null;

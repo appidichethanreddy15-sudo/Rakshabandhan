@@ -86,18 +86,20 @@ function AppContent() {
 
   return (
     <div
-      className={`flex flex-col min-h-screen ${currentTheme.bg} text-[#2D2426] transition-colors duration-700 relative overflow-hidden`}
+      className={`flex flex-col min-h-screen ${currentTheme.bg} text-[#2D2426] transition-colors duration-700 relative`}
     >
       {/* Universal Scroll To Top on Every Route Change */}
       <ScrollToTop />
 
-      {/* Dynamic Ambient Background Light Auras */}
-      <div
-        className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none -z-10 ${currentTheme.aura1} transition-all duration-700`}
-      />
-      <div
-        className={`absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none -z-10 ${currentTheme.aura2} transition-all duration-700`}
-      />
+      {/* Dynamic Ambient Background Light Auras isolated in fixed overlay */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div
+          className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl ${currentTheme.aura1} transition-all duration-700`}
+        />
+        <div
+          className={`absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full blur-3xl ${currentTheme.aura2} transition-all duration-700`}
+        />
+      </div>
 
       {!isIntroPage && <Navbar />}
       <main className="flex-1 w-full relative z-10">

@@ -53,15 +53,6 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
 
     prevPathRef.current = currentPath;
     setAnimKey(`${currentPath}-${Date.now()}`);
-
-    // Instantaneous scroll to top to prevent landing partway down the new chapter
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    if (document.documentElement) {
-      document.documentElement.scrollTop = 0;
-    }
-    if (document.body) {
-      document.body.scrollTop = 0;
-    }
   }, [location.pathname]);
 
   const getAnimationClass = () => {
@@ -72,7 +63,7 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   };
 
   return (
-    <div className="scrapbook-stack-container book-spine-crease w-full flex flex-col flex-1 overflow-x-hidden">
+    <div className="scrapbook-stack-container book-spine-crease w-full flex flex-col flex-1">
       
       {/* Layer 1: Stacked Backing Page in 3D Depth */}
       <div className="scrapbook-page-stack-layer-1" />

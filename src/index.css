@@ -25,11 +25,17 @@
     --color-charcoal-muted: #7E7275;
   }
 
+  html {
+    scroll-behavior: auto;
+    overflow-x: hidden;
+  }
+
   body {
     background-color: var(--color-ivory);
     color: var(--color-charcoal);
     font-family: var(--font-sans);
     overflow-x: hidden;
+    min-height: 100vh;
   }
 
   #root {
