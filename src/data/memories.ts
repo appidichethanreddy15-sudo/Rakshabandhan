@@ -55,7 +55,7 @@ export const sequentialMemories: StoryMemory[] = [
     id: 4,
     sectionNumber: 4,
     title: "A Bike Ride With You",
-    image: "/images/maaname.jpeg",
+    image: "/images/ride.png",
     date: "Evening Ride",
     story: "I still remember the bike ride we took together. The gentle evening breeze, the road ahead, our conversations over the wind, and laughing at the most ordinary little things along the way. That ride showed me that it doesn't take a grand occasion to make a memory. Simply sitting beside you, enjoying the journey, and sharing genuine moments turns everyday hours into something truly unforgettable.",
     buttonText: "Continue"
