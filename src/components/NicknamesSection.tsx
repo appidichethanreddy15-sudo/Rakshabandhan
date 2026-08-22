@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
+import React, { useState, useRef } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { WashiTape } from './WashiTape';
 import { ImageWithFallback } from './ImageWithFallback';
@@ -124,85 +123,66 @@ interface NicknamesSectionProps {
 export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNext }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [animStage, setAnimStage] = useState<'idle' | 'out' | 'in'>('idle');
-  const [variation, setVariation] = useState<0 | 1 | 2 | 3>(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [showLightSweep, setShowLightSweep] = useState(false);
   const [revealedIndices, setRevealedIndices] = useState<number[]>([0]);
+  const [mouseTilt, setMouseTilt] = useState({ rotateX: 0, rotateY: 0 });
 
-  // Final Page Turn Animation
+  // 3D Page Turn on Continue
   const [isPageTurning, setIsPageTurning] = useState(false);
+  const cardContainerRef = useRef<HTMLDivElement>(null);
 
   const currentNickname = nicknamesSequence[currentIndex];
   const isLast = currentIndex === nicknamesSequence.length - 1;
 
-  // Handle Nickname 3D Reveal with 4 Unpredictable Variations
+  // Ultra-Fast 3D Reveal Handler (Total: ~450ms)
   const handleRevealNext = () => {
     if (isAnimating || isLast) return;
 
     setIsAnimating(true);
-    const nextVar = ((variation + 1) % 4) as 0 | 1 | 2 | 3;
-    setVariation(nextVar);
     setAnimStage('out');
-    setShowLightSweep(true);
 
-    // 0.55s: Swap to next card & start 3D entrance
+    // Phase 1 (160ms Exit): Rotate and recede
     setTimeout(() => {
       const nextIdx = currentIndex + 1;
       setCurrentIndex(nextIdx);
       setRevealedIndices((prev) => Array.from(new Set([...prev, nextIdx])));
       setAnimStage('in');
+    }, 160);
 
-      // If revealing the final "Bangaram ❤️", trigger delicate celebratory particle burst
-      if (nextIdx === nicknamesSequence.length - 1) {
-        try {
-          confetti({
-            particleCount: 50,
-            spread: 75,
-            origin: { y: 0.65 },
-            colors: ['#D4AF37', '#9B5DE5', '#C87D88', '#FBF4DE', '#F472B6']
-          });
-        } catch {
-          // ignore
-        }
-      }
-    }, 550);
-
-    // 1.2s: Settle and re-enable button
+    // Phase 2 (290ms Entrance): Rotate into place & settle
     setTimeout(() => {
       setAnimStage('idle');
-      setShowLightSweep(false);
       setIsAnimating(false);
-    }, 1200);
+    }, 450);
   };
 
-  // Handle Final Continue Button with 3D Scrapbook Page Turn
+  // 3D Desktop Mouse Parallax Effect (±5 degrees tilt)
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isAnimating) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const xRatio = (e.clientX - rect.left) / rect.width - 0.5;
+    const yRatio = (e.clientY - rect.top) / rect.height - 0.5;
+    setMouseTilt({
+      rotateY: xRatio * 10,  // -5deg to +5deg
+      rotateX: -yRatio * 10  // -5deg to +5deg
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setMouseTilt({ rotateX: 0, rotateY: 0 });
+  };
+
+  // Final Continue Action with 3D Page Turn
   const handleFinalContinue = () => {
     setIsPageTurning(true);
     setTimeout(() => {
       onNext();
-    }, 450);
-  };
-
-  // Select dynamic CSS class based on active variation
-  const getAnimClass = () => {
-    if (animStage === 'out') {
-      if (variation === 0) return 'nickname-var-a-out';
-      if (variation === 1) return 'nickname-var-b-out';
-      if (variation === 2) return 'nickname-var-c-out';
-      return 'nickname-var-d-out';
-    }
-    if (animStage === 'in') {
-      if (variation === 0) return 'nickname-var-a-in';
-      if (variation === 1) return 'nickname-var-b-in';
-      if (variation === 2) return 'nickname-var-c-in';
-      return 'nickname-var-d-in';
-    }
-    return 'hover:scale-101 hover:-translate-y-0.5';
+    }, 400);
   };
 
   return (
     <div
-      className={`w-full flex flex-col items-center text-center select-none transition-all duration-400 ${
+      className={`w-full flex flex-col items-center text-center select-none transition-all duration-300 ${
         isPageTurning ? 'memory-turn-forward-out pointer-events-none' : ''
       }`}
     >
@@ -236,84 +216,110 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
         </p>
       </div>
 
-      {/* 4. Compact 3D Floating Nickname Card (Preserved Original Small Size) */}
-      <div className="w-full max-w-md my-4 flex flex-col items-center relative perspective-1200">
+      {/* 4. Physical 3D Floating Nickname Card Stage with Depth Layers & Mouse Parallax */}
+      <div
+        ref={cardContainerRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="w-full max-w-md my-4 flex flex-col items-center relative perspective-1200"
+      >
         
-        {/* Subtle Floating Particles during transition */}
+        {/* Subtle 3D Sparkle Particles (Emits 4–5 subtle sparkles during reveal) */}
         {isAnimating && (
           <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center">
-            <div className="absolute text-sm animate-particle-orbit [animation-delay:0ms]">✨</div>
-            <div className="absolute text-xs animate-particle-orbit [animation-delay:200ms] text-[#9B5DE5]">💜</div>
-            <div className="absolute text-sm animate-particle-orbit [animation-delay:400ms] text-[#D4AF37]">🌸</div>
-            <div className="absolute text-xs animate-particle-orbit [animation-delay:600ms]">❤️</div>
+            <span className="absolute -top-3 left-10 text-sm animate-mini-sparkle [animation-delay:0ms]">✨</span>
+            <span className="absolute -top-2 right-12 text-xs text-[#D4AF37] animate-mini-sparkle [animation-delay:80ms]">⭐</span>
+            <span className="absolute -bottom-2 left-16 text-sm text-[#C87D88] animate-mini-sparkle [animation-delay:120ms]">🌸</span>
+            <span className="absolute -bottom-3 right-10 text-xs text-[#6C2231] animate-mini-sparkle [animation-delay:160ms]">❤️</span>
           </div>
         )}
 
-        {/* The Original Compact Card */}
+        {/* 3D Multi-Layer Card System */}
         <div
-          className={`w-full p-4 sm:p-5 rounded-2xl ${currentNickname.bgGradient} border-2 ${currentNickname.borderColor} ${currentNickname.glowEffect} transform-style-3d transition-all duration-300 relative overflow-hidden ${getAnimClass()}`}
+          style={{
+            transform: !isAnimating
+              ? `rotateX(${mouseTilt.rotateX}deg) rotateY(${mouseTilt.rotateY}deg)`
+              : undefined,
+            transition: !isAnimating ? 'transform 0.15s ease-out' : undefined
+          }}
+          className="relative w-full transform-style-3d cursor-default py-2"
         >
-          {/* 3D Diagonal Light Sweep */}
-          {showLightSweep && <div className="card-light-sweep" />}
+          {/* Layer 1: Secondary Paper Depth Card Behind */}
+          <div className="absolute inset-0 translate-y-1 -translate-z-4 -rotate-1 rounded-2xl bg-[#F5ECE0] border border-[#D4AF37]/30 opacity-70 pointer-events-none shadow-sm" />
 
-          {/* Card Header: Badge + Counter */}
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-[11px] font-sans font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/80 border border-[#C87D88]/20 text-[#7E7275]">
-              {currentNickname.badge}
-            </span>
+          {/* Layer 2: Soft Ambient Shadow */}
+          <div className="absolute inset-0 translate-y-2 blur-md bg-[#2D2426]/10 rounded-2xl pointer-events-none" />
 
-            <span className="text-[11px] font-sans font-bold text-[#7E7275]/80 tracking-widest uppercase">
-              {currentIndex + 1} of {nicknamesSequence.length}
-            </span>
+          {/* Layer 3: Main Front Floating 3D Card */}
+          <div
+            className={`w-full p-4 sm:p-5 rounded-2xl ${currentNickname.bgGradient} border-2 ${currentNickname.borderColor} ${currentNickname.glowEffect} transform-style-3d translate-z-8 shadow-md relative overflow-hidden ${
+              animStage === 'out'
+                ? 'animate-fast-3d-out'
+                : animStage === 'in'
+                ? 'animate-fast-3d-in'
+                : ''
+            }`}
+          >
+            {/* Subtle Light Beam */}
+            {isAnimating && <div className="card-light-sweep" />}
+
+            {/* Card Header: Badge + Counter */}
+            <div className="flex items-center justify-between mb-2 translate-z-4">
+              <span className="text-[11px] font-sans font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/85 border border-[#C87D88]/20 text-[#7E7275] shadow-2xs">
+                {currentNickname.badge}
+              </span>
+
+              <span className="text-[11px] font-sans font-bold text-[#7E7275]/80 tracking-widest uppercase">
+                {currentIndex + 1} of {nicknamesSequence.length}
+              </span>
+            </div>
+
+            {/* Nickname Title (Main Focus - Large & Readable) */}
+            <div className="flex items-center justify-center gap-2 py-1 translate-z-6">
+              <span className={`font-handwritten text-3xl sm:text-4xl font-bold ${currentNickname.textColor} tracking-wide drop-shadow-2xs`}>
+                {currentNickname.name}
+              </span>
+              <span className="text-2xl animate-bounce [animation-duration:2s]">
+                {currentNickname.emoji}
+              </span>
+            </div>
+
+            {/* Subtitle / Meaning Description */}
+            <p className="font-serif-heading italic text-xs sm:text-sm text-[#524749] mt-1 text-center translate-z-3">
+              “{currentNickname.subtitle}”
+            </p>
           </div>
-
-          {/* Nickname Title (Visual Focus) */}
-          <div className="flex items-center justify-center gap-2 py-1">
-            <span className={`font-handwritten text-2xl sm:text-3xl font-bold ${currentNickname.textColor}`}>
-              {currentNickname.name}
-            </span>
-            <span className="text-xl">{currentNickname.emoji}</span>
-          </div>
-
-          {/* Subtitle snippet */}
-          <p className="font-serif-heading italic text-xs sm:text-sm text-[#524749] mt-1 text-center">
-            “{currentNickname.subtitle}”
-          </p>
         </div>
 
-        {/* Reveal Next Name Button */}
+        {/* 5. Reveal Button / Final Action */}
         {!isLast ? (
           <div className="mt-4">
             <button
               onClick={handleRevealNext}
               disabled={isAnimating}
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#F7E6E8] text-[#6C2231] hover:bg-[#6C2231] hover:text-[#FAF6F0] transition-all text-xs font-semibold uppercase tracking-widest shadow-xs border border-[#C87D88]/30 cursor-pointer disabled:opacity-60 disabled:pointer-events-none active:scale-95"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] hover:shadow-lg hover:scale-104 active:scale-96 transition-all text-xs font-semibold uppercase tracking-widest shadow-md border border-[#D4AF37]/35 cursor-pointer disabled:opacity-75 disabled:pointer-events-none group"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Reveal another name → ({currentIndex + 1}/{nicknamesSequence.length})</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37] group-hover:rotate-45 transition-transform" />
+              <span>Reveal Another Name → ({currentIndex + 1}/{nicknamesSequence.length})</span>
             </button>
           </div>
         ) : (
           /* Sequence Complete: Emotional Note + Final Continue Button */
-          <div className="w-full animate-fade-in [animation-duration:500ms] mt-4 space-y-4">
-            <p className="font-sans text-xs sm:text-sm text-[#7E7275] italic">
-              “Okay... I think that's enough names for one person. 😂❤️”
-            </p>
-
-            <div className="p-4 rounded-xl bg-gradient-to-br from-[#F7E6E8]/70 via-[#FFFDF9] to-[#FBF4DE]/60 border border-[#D4AF37]/40 shadow-xs">
+          <div className="w-full animate-fade-in [animation-duration:400ms] mt-4 space-y-4">
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-[#F7E6E8]/85 via-[#FFFDF9] to-[#FBF4DE]/80 border-2 border-[#D4AF37]/60 shadow-md">
               <p className="font-serif-heading text-lg sm:text-xl text-[#6C2231] font-semibold leading-relaxed">
-                “Whatever I call you... you're still my dearest Akkaaa who became true family to me.”
+                “Whatever I call you... you're still the same person who became family to me.”
               </p>
-              <p className="font-handwritten text-2xl sm:text-3xl text-[#6C2231] font-bold mt-1">
-                Bangarammmm ❤️ (Akkaaa)
+              <p className="font-handwritten text-3xl sm:text-4xl text-[#6C2231] font-bold mt-1.5">
+                Bangarammmm ❤️
               </p>
             </div>
 
-            {/* Final Action: Continue Our Story with 3D Page Turn */}
+            {/* Final Continue Button */}
             <div className="pt-2">
               <button
                 onClick={handleFinalContinue}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group border border-[#D4AF37]/30"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group border border-[#D4AF37]/40"
               >
                 <span>Continue Our Story →</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
@@ -322,7 +328,7 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
           </div>
         )}
 
-        {/* Small Discovered Chips */}
+        {/* Small Discovered Badges */}
         {revealedIndices.length > 1 && (
           <div className="mt-6 pt-3 border-t border-[#C87D88]/15 w-full flex flex-wrap items-center justify-center gap-1.5">
             {revealedIndices.map((idx) => {
@@ -334,22 +340,20 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
                     if (!isAnimating && idx !== currentIndex) {
                       setIsAnimating(true);
                       setAnimStage('out');
-                      setShowLightSweep(true);
                       setTimeout(() => {
                         setCurrentIndex(idx);
                         setAnimStage('in');
-                      }, 550);
+                      }, 160);
                       setTimeout(() => {
                         setAnimStage('idle');
-                        setShowLightSweep(false);
                         setIsAnimating(false);
-                      }, 1200);
+                      }, 450);
                     }
                   }}
                   className={`px-2.5 py-0.5 rounded-full text-xs font-handwritten font-bold border transition-all cursor-pointer ${
                     idx === currentIndex
                       ? 'bg-[#6C2231] text-[#FAF6F0] border-[#D4AF37] scale-105 shadow-2xs'
-                      : 'bg-white/80 text-[#6C2231] border-[#C87D88]/25 hover:bg-[#F7E6E8]'
+                      : 'bg-white/85 text-[#6C2231] border-[#C87D88]/25 hover:bg-[#F7E6E8]'
                   }`}
                 >
                   {item.name} {item.emoji}
