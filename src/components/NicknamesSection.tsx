@@ -321,7 +321,7 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
                 onClick={handleFinalContinue}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-9 sm:px-11 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#6C2231] to-[#842D3D] text-[#FAF6F0] font-sans font-semibold text-base shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer group border border-[#D4AF37]/40"
               >
-                <span>Continue Our Story →</span>
+                <span>Continue Our Story</span>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>

@@ -176,7 +176,7 @@ export const RakhiInteraction: React.FC = () => {
               onClick={() => navigate('/letter')}
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#6C2231] text-[#FAF6F0] text-xs font-bold uppercase tracking-widest hover:bg-[#842D3D] shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
-              <span>Read Final Letter →</span>
+              <span>Read Final Letter</span>
               <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
             </button>
           </div>
@@ -353,7 +353,7 @@ export const RakhiInteraction: React.FC = () => {
                         onClick={handleContinueToLetter}
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#E2C055] text-[#241126] font-sans font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer group"
                       >
-                        <span>Read Final Chapter Letter →</span>
+                        <span>Read Final Chapter Letter</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
