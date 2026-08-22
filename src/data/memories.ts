@@ -82,7 +82,7 @@ export const sequentialMemories: StoryMemory[] = [
     id: 7,
     sectionNumber: 7,
     title: "You Have So Many Names... ❤️",
-    image: "/images/maa_wrist.png",
+    image: "/images/handart.jpeg",
     date: "All The Names I Call You",
     story: "Over these years, you somehow collected so many names from me. Some came from random moments, some from our fights, some from my affection, and some... I don't even remember how they started. 😂 But every name has a little story behind it, and every time I call you by one of them, it feels like I'm talking to a different little part of the person you became in my life.",
     closingNote: "Those were only a few of the memories I never want to forget. ❤️",
