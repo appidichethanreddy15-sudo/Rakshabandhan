@@ -52,15 +52,6 @@ export const sequentialMemories: StoryMemory[] = [
   {
     id: 4,
     sectionNumber: 4,
-    title: "The Night I Never Forgot",
-    image: "/images/night-memory.jpg",
-    date: "A Night of Comfort & Trust",
-    story: "Spending that day at your home is a memory I keep very close to my heart—we talked, laughed, shared little things, and simply enjoyed being together. Later that night, while we were sleeping, we both held each other’s hands, a moment we both knew and shared. ❤️\n\nThe next morning, you were still asleep when you called me to sit beside you, and you held my hand tightly again while you were sleeping.\n\nI felt an indescribable happiness and comfort in that little moment, even though I couldn't put my feelings into words.\n\nLater that day, I became so emotional that I couldn't control what I was feeling.\n\nIt was such a simple moment, but I kept thinking about it for almost a week—it became one of those memories I never want to forget. ❤️",
-    buttonText: "Continue →"
-  },
-  {
-    id: 5,
-    sectionNumber: 5,
     title: "A Bike Ride With You",
     image: "/images/memory7.jpg",
     date: "Evening Ride",
@@ -68,8 +59,8 @@ export const sequentialMemories: StoryMemory[] = [
     buttonText: "Continue →"
   },
   {
-    id: 6,
-    sectionNumber: 6,
+    id: 5,
+    sectionNumber: 5,
     title: "The Art You Drew On My Hand",
     image: "/images/hand_art.jpg",
     date: "A Precious Little Memory",
@@ -77,12 +68,21 @@ export const sequentialMemories: StoryMemory[] = [
     buttonText: "Continue →"
   },
   {
-    id: 7,
-    sectionNumber: 7,
+    id: 6,
+    sectionNumber: 6,
     title: "A Video Call That Made My Whole Day",
     image: "/images/memory11.jpg",
     date: "Special Video Call",
     story: "Whenever I see your name pop up for a video call, no matter how exhausted, stressed, or drained I was feeling, everything instantly gets lighter. Watching you talk animatedly with your hands, laugh at silly things, make funny faces, and just share your unfiltered day with me brings a genuine smile to my face that stays for hours. Seeing you happy on that screen reminded me that some of the best moments with you don't need a grand plan—just seeing your genuine smile across the screen is enough to brighten my entire world.",
+    buttonText: "Continue →"
+  },
+  {
+    id: 7,
+    sectionNumber: 7,
+    title: "The Night I Never Forgot",
+    image: "/images/night-memory.jpg",
+    date: "A Night of Comfort & Trust",
+    story: "Spending that day at your home is a memory I keep very close to my heart—we talked, laughed, shared little things, and simply enjoyed being together. Later that night, while we were sleeping, we both held each other’s hands, a moment we both knew and shared. ❤️\n\nThe next morning, you were still asleep when you called me to sit beside you, and you held my hand tightly again while you were sleeping.\n\nI felt an indescribable happiness and comfort in that little moment, even though I couldn't put my feelings into words.\n\nLater that day, I became so emotional that I couldn't control what I was feeling.\n\nIt was such a simple moment, but I kept thinking about it for almost a week—it became one of those memories I never want to forget. ❤️",
     buttonText: "Continue →"
   },
   {
