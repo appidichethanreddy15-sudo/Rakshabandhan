@@ -21,22 +21,29 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
   const location = useLocation();
   const prevPathRef = useRef(location.pathname);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+  const [transitionType, setTransitionType] = useState<'book-turn' | 'photo-dive'>('book-turn');
   const [animKey, setAnimKey] = useState(location.pathname);
   const [showStardust, setShowStardust] = useState(false);
 
   useEffect(() => {
-    const prevIdx = routeOrder.indexOf(prevPathRef.current);
-    const currIdx = routeOrder.indexOf(location.pathname);
+    const prevPath = prevPathRef.current;
+    const currentPath = location.pathname;
+    const prevIdx = routeOrder.indexOf(prevPath);
+    const currIdx = routeOrder.indexOf(currentPath);
 
     // Determine 3D book turning direction
-    if (currIdx >= prevIdx || prevIdx === -1) {
-      setDirection('forward');
+    const isFwd = currIdx >= prevIdx || prevIdx === -1;
+    setDirection(isFwd ? 'forward' : 'backward');
+
+    // Detect Page 1 -> Page 2 3D Photo Dive portal
+    if (currentPath === '/my-words' && prevPath === '/') {
+      setTransitionType('photo-dive');
     } else {
-      setDirection('backward');
+      setTransitionType('book-turn');
     }
 
     // Trigger subtle particles on major milestone transitions
-    if (['/moments', '/rakhi', '/letter'].includes(location.pathname)) {
+    if (['/moments', '/rakhi', '/letter'].includes(currentPath)) {
       setShowStardust(true);
       const timer = setTimeout(() => setShowStardust(false), 900);
       return () => clearTimeout(timer);
@@ -44,12 +51,19 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       setShowStardust(false);
     }
 
-    prevPathRef.current = location.pathname;
-    setAnimKey(`${location.pathname}-${Date.now()}`);
+    prevPathRef.current = currentPath;
+    setAnimKey(`${currentPath}-${Date.now()}`);
 
     // Smooth scroll to top when turning pages
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
+
+  const getAnimationClass = () => {
+    if (transitionType === 'photo-dive') {
+      return 'animate-page2-emerge';
+    }
+    return direction === 'forward' ? 'book-turn-forward-in' : 'book-turn-backward-in';
+  };
 
   return (
     <div className="scrapbook-stack-container book-spine-crease w-full flex flex-col flex-1 overflow-x-hidden">
@@ -72,15 +86,17 @@ export const PageTransition: React.FC<PageTransitionProps> = ({ children }) => {
       {/* 3D Active Turning Book Page Wrapper */}
       <div
         key={animKey}
-        className={`w-full flex flex-col flex-1 relative transform-style-3d z-10 ${
-          direction === 'forward' ? 'book-turn-forward-in' : 'book-turn-backward-in'
-        }`}
+        className={`w-full flex flex-col flex-1 relative transform-style-3d z-10 ${getAnimationClass()}`}
       >
-        {/* Subtle Paper Edge Lighting */}
-        <div className={direction === 'forward' ? 'paper-edge-left' : 'paper-edge-right'} />
+        {/* Subtle Paper Edge Lighting (Only on book turns) */}
+        {transitionType === 'book-turn' && (
+          <div className={direction === 'forward' ? 'paper-edge-left' : 'paper-edge-right'} />
+        )}
 
         {/* Soft Golden Page Turn Sheen Sweep */}
-        <div className="book-page-sheen" />
+        {transitionType === 'book-turn' && (
+          <div className="book-page-sheen" />
+        )}
 
         {/* Page Content */}
         {children}
