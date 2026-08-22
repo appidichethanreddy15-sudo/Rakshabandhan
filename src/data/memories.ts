@@ -44,9 +44,9 @@ export const sequentialMemories: StoryMemory[] = [
   {
     id: 3,
     sectionNumber: 3,
-    title: "The 3 Days That Felt Like 3 Months",
+    title: "A Name I Could Never Forget",
     image: "/images/memory8.jpg",
-    story: "Three days may sound like nothing to someone else, but for us, those three days of silence felt like three long months. Not talking to you, not sharing my daily routine, and seeing my phone without your messages felt completely strange and empty. It made me realize just how deeply I depend on your presence in my everyday life. When we finally spoke again, all the tension melted away in seconds, and it proved to me that our bond is far stronger than any temporary disagreement.",
+    story: "I wrote your name on a simple piece of chalk, but for me, it was never just a piece of art. ❤️\n\nEvery stroke carried a little piece of my love, because your name holds countless memories and emotions in my heart.\n\nIt may look small and ordinary to others, but I made it with feelings I could never fully put into words.\n\nSometimes, the simplest things we create with love become the memories we hold closest to our hearts. 🥹❤️",
     buttonText: "Continue →"
   },
   {
