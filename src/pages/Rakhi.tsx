@@ -38,7 +38,7 @@ export const Rakhi: React.FC = () => {
             <div className="lg:col-span-5 flex justify-center">
               <div className="polaroid-frame rounded-sm bg-white shadow-xl rotate-1 hover:rotate-0 transition-transform max-w-sm w-full">
                 <ImageWithFallback
-                  src="/images/rakhi.jpg"
+                  src="/images/rakhi.jpeg"
                   alt="Last year's Rakhi on my wrist"
                   aspectRatio="auto"
                   className="rounded-xs max-h-[380px] w-full object-contain bg-[#FAF6F0]"
