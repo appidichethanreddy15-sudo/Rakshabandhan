@@ -132,7 +132,7 @@ export const Home: React.FC = () => {
                 }`}
               >
                 <ImageWithFallback
-                  src="/images/hero.png"
+                  src="/images/snap.jpeg"
                   alt="For My Bangarammmm"
                   aspectRatio="auto"
                   objectFit="contain"
