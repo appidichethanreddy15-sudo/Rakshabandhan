@@ -55,7 +55,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
   return (
     <div className={`relative overflow-hidden ${aspectClass} ${className}`}>
       {!loaded && (
-        <div className="absolute inset-0 bg-[#FAF6F0] animate-pulse flex items-center justify-center text-[#C87D88]/40">
+        <div className="absolute inset-0 bg-[#FAF6F0] animate-pulse flex items-center justify-center text-[#C87D88]/40 min-h-[220px]">
           <ImageIcon className="w-8 h-8 opacity-40 animate-bounce" />
         </div>
       )}
@@ -65,7 +65,7 @@ export const ImageWithFallback: React.FC<ImageWithFallbackProps> = ({
         loading="lazy"
         onError={() => setError(true)}
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full ${fitClass} transition-all duration-500 ${
+        className={`w-full ${aspectRatio === 'auto' ? 'h-auto block' : 'h-full'} ${fitClass} transition-all duration-500 ${
           loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
         }`}
       />

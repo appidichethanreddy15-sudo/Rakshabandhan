@@ -136,7 +136,7 @@ export const Home: React.FC = () => {
                   alt="For My Bangarammmm"
                   aspectRatio="auto"
                   objectFit="contain"
-                  className="rounded-xs max-h-[520px] w-full"
+                  className="rounded-xs w-full h-auto"
                 />
 
                 <div className="mt-4 pt-3 border-t border-[#F7E6E8] flex items-center justify-between px-2">
