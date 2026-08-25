@@ -274,9 +274,9 @@ export const Letter: React.FC = () => {
                     </div>
 
                     {/* Big Heartfelt Reveal */}
-                    <div className="py-2 border-y border-[#D4AF37]/20 bg-gradient-to-r from-transparent via-[#D4AF37]/15 to-transparent text-center">
-                      <h3 className="font-serif-heading text-3xl sm:text-5xl font-bold text-[#FFFDF9] tracking-tight filter drop-shadow-md">
-                        I Love youu Bangaramm <span className="text-[#D4AF37]">❤️</span>
+                    <div className="py-2.5 px-2 border-y border-[#D4AF37]/20 bg-gradient-to-r from-transparent via-[#D4AF37]/15 to-transparent text-center">
+                      <h3 className="font-serif-heading text-2xl sm:text-4xl md:text-5xl font-bold text-[#FFFDF9] tracking-tight filter drop-shadow-md leading-snug">
+                        I Lovee Youuu Amma🥺💕<span className="text-[#E9D5FF] block sm:inline text-xl sm:text-3xl md:text-4xl">(Bangaramm💜)</span>
                       </h3>
                     </div>
 

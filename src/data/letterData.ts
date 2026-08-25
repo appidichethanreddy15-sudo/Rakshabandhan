@@ -7,13 +7,13 @@ export const letterData = {
   
   finalSurprise: {
     title: "One Last Thing For You... ❤️",
-    mainWord: "I Love youu Bangaramm ❤️",
+    mainWord: "I Lovee Youuu Amma🥺💕(Bangaramm💜)",
     akkaHeading: "Akkaaa... 🥺❤️",
     messageLines: [
       "No matter how many silly names I call you,",
       "in my heart, you will always be my dearest Akkaaa.",
       "You are my safe place, my guide, and my true family.",
-      "I Love youu Bangaramm ❤️",
+      "I Lovee Youuu Amma🥺💕(Bangaramm💜)",
       "Always & Forever ✨"
     ]
   }
