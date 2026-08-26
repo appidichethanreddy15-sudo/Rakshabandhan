@@ -193,13 +193,13 @@ export const NicknamesSection: React.FC<NicknamesSectionProps> = ({ image, onNex
           <WashiTape color="pink" rotation="-rotate-2" />
         </div>
 
-        <div className="polaroid-frame rounded-sm bg-white shadow-xl hover:rotate-0 transition-transform duration-500 overflow-hidden">
+        <div className="polaroid-frame rounded-sm bg-white shadow-xl hover:rotate-0 transition-transform duration-500">
           <ImageWithFallback
             src={image}
             alt="You Have So Many Names"
             aspectRatio="auto"
             objectFit="contain"
-            className="rounded-xs max-h-[460px] sm:max-h-[500px] w-auto h-auto mx-auto"
+            className="rounded-xs w-full h-auto block"
           />
         </div>
       </div>
