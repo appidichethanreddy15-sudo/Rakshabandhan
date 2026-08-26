@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import confetti from 'canvas-confetti';
 import { Sparkles, Star } from 'lucide-react';
-import { ambientAudio } from '../utils/audioEngine';
 
 interface CelebrationTransitionProps {
   onComplete: () => void;
@@ -23,13 +22,6 @@ export const CelebrationTransition: React.FC<CelebrationTransitionProps> = ({ on
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mediaQuery.matches);
-
-    // Optional audio celebration sound
-    try {
-      ambientAudio.playCelebrationChimes();
-    } catch {
-      // ignore
-    }
 
     // Stage progression timings
     const t2 = setTimeout(() => setStage(2), 500);
