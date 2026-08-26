@@ -22,6 +22,7 @@ export interface StoryMemory {
   buttonText: string;
   closingNote?: string;
   isNicknames?: boolean;
+  storyHighlight?: string; // A sentence within story to be rendered with emotional accent styling
 }
 
 // Full 7 Sequential Scrapbook Memories for Chapter 3
@@ -72,10 +73,11 @@ export const sequentialMemories: StoryMemory[] = [
   {
     id: 6,
     sectionNumber: 6,
-    title: "A Video Call That Made My Whole Day",
+    title: "Just Seeing You Was Enough to Make My Day ❤️",
     image: "/images/vc.png",
     date: "Special Video Call",
-    story: "Whenever I see your name pop up for a video call, no matter how exhausted, stressed, or drained I was feeling, everything instantly gets lighter. Watching you talk animatedly with your hands, laugh at silly things, make funny faces, and just share your unfiltered day with me brings a genuine smile to my face that stays for hours. Seeing you happy on that screen reminded me that some of the best moments with you don't need a grand plan—just seeing your genuine smile across the screen is enough to brighten my entire world.",
+    story: "For the past month, our little video calls have become one of the sweetest parts of my day. We don't even need audio sometimes—we just look at each other, chat, smile, and somehow that alone makes everything feel a little better. I know I keep asking you for a VC because there is something about seeing you that I can never really explain; for a moment, everything feels peaceful, and I just want to keep looking at you forever. You always tell me that if we do this every day, we might get too attached and eventually find it difficult to sleep without each other, and maybe you're right. But if I ever have to choose between my own sadness and seeing you suffer or miss me, I'll always choose my own. Nenu ayina badha paduthanu kani, ninnu matram badha padanivvanu. ❤️",
+    storyHighlight: "Nenu ayina badha paduthanu kani, ninnu matram badha padanivvanu.",
     buttonText: "Continue"
   },
   {

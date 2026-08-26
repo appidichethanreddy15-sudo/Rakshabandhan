@@ -8,6 +8,37 @@ import { NicknamesSection } from '../components/NicknamesSection';
 import { MemoryTunnelTransition } from '../components/MemoryTunnelTransition';
 import { ArrowRight, Sparkles, Heart } from 'lucide-react';
 
+// Renders a story paragraph, optionally highlighting a specific sentence with emotional accent styling
+function renderStory(story: string, highlight?: string) {
+  if (!highlight || !story.includes(highlight)) {
+    return (
+      <p className="font-sans text-base sm:text-lg text-[#2D2426] leading-relaxed whitespace-pre-line first-letter:font-serif-heading first-letter:text-3xl first-letter:font-bold first-letter:text-[#6C2231] first-letter:mr-1">
+        {story}
+      </p>
+    );
+  }
+
+  const parts = story.split(highlight);
+  return (
+    <p className="font-sans text-base sm:text-lg text-[#2D2426] leading-relaxed first-letter:font-serif-heading first-letter:text-3xl first-letter:font-bold first-letter:text-[#6C2231] first-letter:mr-1">
+      {parts[0]}
+      <span
+        className="italic"
+        style={{
+          fontFamily: "'Georgia', 'Times New Roman', serif",
+          color: '#8B2A3A',
+          textShadow: '0 0 18px rgba(196,108,130,0.35)',
+          letterSpacing: '0.01em',
+          fontWeight: 500,
+        }}
+      >
+        {highlight}
+      </span>
+      {parts[1]}
+    </p>
+  );
+}
+
 // Easily configurable memory steps that trigger the 3D Memory Tunnel transition
 // (e.g. Step 3 -> Step 4, and Step 5 -> Step 6)
 const TUNNEL_STEP_TRANSITIONS = [3, 5];
@@ -233,9 +264,7 @@ export const Memories: React.FC = () => {
 
               {/* 4. Personal Paragraph Story */}
               <div className="paper-parchment rounded-2xl p-6 sm:p-8 border border-[#C87D88]/25 shadow-xs max-w-2xl w-full text-left my-2">
-                <p className="font-sans text-base sm:text-lg text-[#2D2426] leading-relaxed whitespace-pre-line first-letter:font-serif-heading first-letter:text-3xl first-letter:font-bold first-letter:text-[#6C2231] first-letter:mr-1">
-                  {displayedMemory.story}
-                </p>
+                {renderStory(displayedMemory.story, displayedMemory.storyHighlight)}
               </div>
 
               {/* Optional Closing Note on Final Section */}
